@@ -251,6 +251,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenProductDet
                     src={prod.image_url}
                     alt={prod.name}
                     className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                    onError={(e) => {
+                      (e.currentTarget as HTMLImageElement).src =
+                        'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80';
+                    }}
                   />
                   <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] font-bold text-farm-900 shadow-xs flex items-center gap-1">
                     <MapPin className="w-3 h-3 text-farm-700" />

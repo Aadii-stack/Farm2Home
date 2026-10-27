@@ -232,7 +232,7 @@ export const SEED_PRODUCTS: Product[] = [
     category_id: 'cat-leafy',
     name: 'Aromatic Desi Kothimbir (Coriander)',
     description: 'Intensely fragrant fresh coriander with root-soil integrity preserved to maintain freshness for up to 5 days in your kitchen.',
-    image_url: 'https://images.unsplash.com/photo-1508873696983-2df5293cb32b?auto=format&fit=crop&w=600&q=80',
+    image_url: 'https://images.unsplash.com/photo-1596797038530-2c107229654b?auto=format&fit=crop&w=600&q=80',
     price: 20,
     unit: 'bunch',
     available_quantity: 50,

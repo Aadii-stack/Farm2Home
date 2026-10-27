@@ -49,6 +49,10 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
             src={product.image_url}
             alt={product.name}
             className="w-full h-full object-cover"
+            onError={(e) => {
+              (e.currentTarget as HTMLImageElement).src =
+                'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80';
+            }}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-black/30" />
           <button

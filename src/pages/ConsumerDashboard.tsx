@@ -464,6 +464,10 @@ export const ConsumerDashboard: React.FC = () => {
                             src={it.product.image_url}
                             alt={it.product_name_snapshot}
                             className="w-12 h-12 rounded-xl object-cover border border-slate-200"
+                            onError={(e) => {
+                              (e.currentTarget as HTMLImageElement).src =
+                                'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80';
+                            }}
                           />
                         )}
                         <div>

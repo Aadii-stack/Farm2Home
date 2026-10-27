@@ -27,10 +27,23 @@ import {
 // Local storage keys for persistent demo state across refreshes
 const STORAGE_PREFIX = 'farm2home_demo_';
 
+const BROKEN_IMG_REPLACEMENTS: Record<string, string> = {
+  'https://images.unsplash.com/photo-1508873696983-2df5293cb32b?auto=format&fit=crop&w=600&q=80':
+    'https://images.unsplash.com/photo-1596797038530-2c107229654b?auto=format&fit=crop&w=600&q=80',
+};
+
 function getInitialStore<T>(key: string, fallback: T): T {
   try {
     const raw = localStorage.getItem(STORAGE_PREFIX + key);
-    return raw ? JSON.parse(raw) : fallback;
+    if (!raw) return fallback;
+    const parsed = JSON.parse(raw);
+    if (key === 'products' && Array.isArray(parsed)) {
+      return parsed.map((p: any) => ({
+        ...p,
+        image_url: BROKEN_IMG_REPLACEMENTS[p.image_url] || p.image_url,
+      })) as unknown as T;
+    }
+    return parsed;
   } catch {
     return fallback;
   }

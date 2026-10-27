@@ -281,6 +281,10 @@ export const MarketplacePage: React.FC<MarketplacePageProps> = ({
                       alt={prod.name}
                       className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
                       loading="lazy"
+                      onError={(e) => {
+                        (e.currentTarget as HTMLImageElement).src =
+                          'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80';
+                      }}
                     />
                     <div className="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] font-bold text-farm-900 shadow-xs flex items-center gap-1 border border-slate-100">
                       <MapPin className="w-3 h-3 text-farm-700" />
