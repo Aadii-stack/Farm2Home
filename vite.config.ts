@@ -20,6 +20,7 @@ export default defineConfig({
       output: {
         manualChunks: {
           'vendor-react': ['react', 'react-dom'],
+          'vendor-lenis': ['lenis', 'lenis/react'],
           'vendor-leaflet': ['leaflet'],
           'vendor-supabase': ['@supabase/supabase-js'],
           'vendor-icons': ['lucide-react'],

@@ -1,4 +1,5 @@
 import React, { useState, lazy, Suspense } from 'react';
+import { ReactLenis } from 'lenis/react';
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 import { Navbar } from './components/layout/Navbar';
@@ -61,7 +62,7 @@ const MainApp: React.FC = () => {
       setMarketplaceFilter(filterParams);
     }
     setActiveTab(tab);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: 'instant' });
   };
 
   const handleOrderSuccess = (orderId: string) => {
@@ -146,10 +147,12 @@ const MainApp: React.FC = () => {
 
 export default function App() {
   return (
-    <AuthProvider>
-      <CartProvider>
-        <MainApp />
-      </CartProvider>
-    </AuthProvider>
+    <ReactLenis root options={{ lerp: 0.1, duration: 1.2, smoothWheel: true, syncTouch: false }}>
+      <AuthProvider>
+        <CartProvider>
+          <MainApp />
+        </CartProvider>
+      </AuthProvider>
+    </ReactLenis>
   );
 }
