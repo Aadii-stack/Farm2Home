@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import {
   ShoppingBag,
   User,
@@ -92,47 +93,33 @@ export const Navbar: React.FC<NavbarProps> = ({
           </div>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-1 bg-farm-50/80 p-1.5 rounded-full border border-farm-100">
-            <button
-              onClick={() => setActiveTab('home')}
-              className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-150 motion-reduce:transition-none ${
-                activeTab === 'home'
-                  ? 'bg-farm-800 text-white shadow-xs'
-                  : 'text-slate-600 hover:text-farm-900 hover:bg-farm-100/60'
-              }`}
-            >
-              Home
-            </button>
-            <button
-              onClick={() => setActiveTab('marketplace')}
-              className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-150 motion-reduce:transition-none ${
-                activeTab === 'marketplace'
-                  ? 'bg-farm-800 text-white shadow-xs'
-                  : 'text-slate-600 hover:text-farm-900 hover:bg-farm-100/60'
-              }`}
-            >
-              Marketplace
-            </button>
-            <button
-              onClick={() => setActiveTab('farmers')}
-              className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-150 motion-reduce:transition-none ${
-                activeTab === 'farmers'
-                  ? 'bg-farm-800 text-white shadow-xs'
-                  : 'text-slate-600 hover:text-farm-900 hover:bg-farm-100/60'
-              }`}
-            >
-              Local Farmers
-            </button>
-            <button
-              onClick={() => setActiveTab('how-it-works')}
-              className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-150 motion-reduce:transition-none ${
-                activeTab === 'how-it-works'
-                  ? 'bg-farm-800 text-white shadow-xs'
-                  : 'text-slate-600 hover:text-farm-900 hover:bg-farm-100/60'
-              }`}
-            >
-              How It Works
-            </button>
+          <nav className="hidden md:flex items-center gap-1 bg-farm-50/80 p-1.5 rounded-full border border-farm-100 relative">
+            {[
+              { id: 'home', label: 'Home' },
+              { id: 'marketplace', label: 'Marketplace' },
+              { id: 'farmers', label: 'Local Farmers' },
+              { id: 'how-it-works', label: 'How It Works' },
+            ].map((tab) => {
+              const isActive = activeTab === tab.id;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`relative px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-150 motion-reduce:transition-none ${
+                    isActive ? 'text-white' : 'text-slate-700 hover:text-farm-950'
+                  }`}
+                >
+                  {isActive && (
+                    <motion.div
+                      layoutId="activeNavPill"
+                      className="absolute inset-0 bg-farm-800 rounded-full shadow-xs"
+                      transition={{ type: 'spring', stiffness: 420, damping: 32 }}
+                    />
+                  )}
+                  <span className="relative z-10">{tab.label}</span>
+                </button>
+              );
+            })}
           </nav>
 
           {/* Actions & Role Switcher */}

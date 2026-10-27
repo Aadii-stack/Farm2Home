@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { X, Trash2, Plus, Minus, ShoppingBag, ArrowRight, ShieldCheck } from 'lucide-react';
 import { useCart } from '../../context/CartContext';
 
@@ -19,40 +20,50 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onProceedToCheckout }) =
     total,
   } = useCart();
 
-  if (!isCartOpen) return null;
-
   return (
-    <div className="fixed inset-0 z-50 overflow-hidden">
-      {/* Backdrop */}
-      <div
-        onClick={() => setIsCartOpen(false)}
-        className="absolute inset-0 bg-slate-900/50 backdrop-blur-xs transition-opacity animate-in fade-in"
-        aria-hidden="true"
-      />
+    <AnimatePresence>
+      {isCartOpen && (
+        <div className="fixed inset-0 z-50 overflow-hidden">
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={() => setIsCartOpen(false)}
+            className="absolute inset-0 bg-slate-900/50 backdrop-blur-xs"
+            aria-hidden="true"
+          />
 
-      <div className="fixed inset-y-0 right-0 max-w-full flex pl-0 sm:pl-10">
-        <div className="w-screen max-w-md bg-white shadow-2xl flex flex-col animate-in slide-in-from-right duration-300">
-          {/* Header */}
-          <div className="px-5 py-4 border-b border-slate-100 flex items-center justify-between bg-farm-50/70">
-            <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 rounded-xl bg-farm-800 text-white flex items-center justify-center shadow-xs">
-                <ShoppingBag className="w-5 h-5 text-emerald-300" />
-              </div>
-              <div>
-                <h2 className="text-base sm:text-lg font-bold text-slate-900 leading-tight">Your Harvest Basket</h2>
-                <p className="text-[11px] text-slate-500 font-medium">
-                  {cart.length} {cart.length === 1 ? 'produce item' : 'produce items'}
-                </p>
-              </div>
-            </div>
-            <button
-              onClick={() => setIsCartOpen(false)}
-              className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition active:scale-95"
-              aria-label="Close harvest basket"
+          <div className="fixed inset-y-0 right-0 max-w-full flex pl-0 sm:pl-10 pointer-events-none">
+            <motion.div
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'spring', damping: 30, stiffness: 350 }}
+              className="w-screen max-w-md bg-white shadow-2xl flex flex-col pointer-events-auto"
             >
-              <X className="w-5 h-5" />
-            </button>
-          </div>
+              {/* Header */}
+              <div className="px-5 py-4 border-b border-slate-100 flex items-center justify-between bg-farm-50/70">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-9 h-9 rounded-xl bg-farm-800 text-white flex items-center justify-center shadow-xs">
+                    <ShoppingBag className="w-5 h-5 text-emerald-300" />
+                  </div>
+                  <div>
+                    <h2 className="text-base sm:text-lg font-bold text-slate-900 leading-tight">Your Harvest Basket</h2>
+                    <p className="text-[11px] text-slate-500 font-medium">
+                      {cart.length} {cart.length === 1 ? 'produce item' : 'produce items'}
+                    </p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setIsCartOpen(false)}
+                  className="min-w-[44px] min-h-[44px] flex items-center justify-center rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition active:scale-95"
+                  aria-label="Close harvest basket"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
 
           {/* Cart Items List */}
           <div data-lenis-prevent className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-3.5">
@@ -185,8 +196,10 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ onProceedToCheckout }) =
               </button>
             </div>
           )}
-        </div>
+        </motion.div>
       </div>
     </div>
+  )}
+</AnimatePresence>
   );
 };

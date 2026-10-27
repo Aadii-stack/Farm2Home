@@ -14,6 +14,7 @@ import {
 import { api } from '../services/api';
 import { Product, Category, FarmerProfile, CartItem } from '../types';
 import { useCart } from '../context/CartContext';
+import { StaggerList, StaggerItem } from '../components/common/Motion';
 
 interface MarketplacePageProps {
   initialSearch?: string;
@@ -260,15 +261,15 @@ export const MarketplacePage: React.FC<MarketplacePageProps> = ({
           </button>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <StaggerList className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
           {products.map((prod) => {
             const inCart = cart.find((i: CartItem) => i.product.id === prod.id);
 
             return (
-              <div
-                key={prod.id}
-                className="group bg-white rounded-3xl overflow-hidden border border-slate-200/90 shadow-xs hover:shadow-xl hover:border-farm-400 transition-all duration-200 flex flex-col justify-between"
-              >
+              <StaggerItem key={prod.id}>
+                <div
+                  className="group h-full bg-white rounded-3xl overflow-hidden border border-slate-200/90 shadow-xs hover:shadow-xl hover:border-farm-400 transition-all duration-200 flex flex-col justify-between"
+                >
                 <div>
                   {/* Image & Tags */}
                   <div
@@ -366,9 +367,10 @@ export const MarketplacePage: React.FC<MarketplacePageProps> = ({
                   )}
                 </div>
               </div>
-            );
-          })}
-        </div>
+            </StaggerItem>
+          );
+        })}
+      </StaggerList>
       )}
     </div>
   );

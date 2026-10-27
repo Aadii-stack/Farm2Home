@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { X, MapPin, Calendar, CheckCircle2, Star, ShoppingBag, Plus, Minus } from 'lucide-react';
 import { Product, Review } from '../../types';
 import { useCart } from '../../context/CartContext';
@@ -20,18 +21,29 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
     api.getReviewsForProduct(product.id).then(setReviews).catch(console.error);
   }, [product]);
 
-  if (!product) return null;
-
-  const cartItem = cart.find((item) => item.product.id === product.id);
-
   const handleAddToCart = () => {
-    addToCart(product, qty);
+    if (product) addToCart(product, qty);
   };
 
   return (
-    <div data-lenis-prevent className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
-      <div className="bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-hidden shadow-2xl flex flex-col border border-slate-100 animate-in zoom-in-95 duration-200">
-        {/* Header */}
+    <AnimatePresence>
+      {product && (
+        <div data-lenis-prevent className="fixed inset-0 z-50 overflow-y-auto bg-slate-900/50 backdrop-blur-xs flex items-center justify-center p-4">
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            className="fixed inset-0"
+          />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: 16 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 16 }}
+            transition={{ type: 'spring', damping: 26, stiffness: 360 }}
+            className="relative z-10 bg-white rounded-3xl max-w-2xl w-full max-h-[90vh] overflow-hidden shadow-2xl flex flex-col border border-slate-100"
+          >
+            {/* Header */}
         <div className="relative h-64 sm:h-72 w-full overflow-hidden shrink-0">
           <img
             src={product.image_url}
@@ -190,7 +202,9 @@ export const ProductDetailModal: React.FC<ProductDetailModalProps> = ({ product,
             <span>Add {qty} {product.unit} to Basket (₹{product.price * qty})</span>
           </button>
         </div>
-      </div>
+      </motion.div>
     </div>
+  )}
+</AnimatePresence>
   );
 };
