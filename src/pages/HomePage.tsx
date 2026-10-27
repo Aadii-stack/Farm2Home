@@ -12,6 +12,7 @@ import {
   Star,
   Users,
   MapPin,
+  ShoppingBag,
 } from 'lucide-react';
 import { api } from '../services/api';
 import { Product, FarmerProfile, Category } from '../types';
@@ -270,27 +271,35 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenProductDet
 
                 {/* Info */}
                 <div className="p-5 space-y-2">
-                  <div className="flex items-center justify-between text-xs text-slate-500">
-                    <span className="font-semibold text-farm-700">{prod.category?.name || 'Produce'}</span>
-                    <span className="text-[11px] text-emerald-800 font-medium bg-emerald-50 px-2 py-0.5 rounded-full">
+                  <div className="flex items-center justify-between text-xs">
+                    <span className="font-bold text-farm-800 bg-farm-50 px-2 py-0.5 rounded-md border border-farm-200/60">
+                      {prod.category?.name || 'Produce'}
+                    </span>
+                    <span
+                      className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
+                        prod.available_quantity <= 10
+                          ? 'bg-amber-50 text-amber-900 border border-amber-200'
+                          : 'bg-emerald-50 text-emerald-900 border border-emerald-200'
+                      }`}
+                    >
                       {prod.available_quantity} {prod.unit} left
                     </span>
                   </div>
 
                   <h3
                     onClick={() => onOpenProductDetail(prod)}
-                    className="text-base font-bold text-slate-900 group-hover:text-farm-800 transition cursor-pointer"
+                    className="text-base font-bold text-slate-900 group-hover:text-farm-800 transition cursor-pointer line-clamp-1"
                   >
                     {prod.name}
                   </h3>
 
-                  <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed">
+                  <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed">
                     {prod.description}
                   </p>
 
-                  <div className="pt-2 flex items-center gap-1.5 text-[11px] text-slate-600">
-                    <span className="w-2 h-2 rounded-full bg-farm-600"></span>
-                    <span>Cultivated by <strong>{prod.farmer?.farm_name || 'Local Farm'}</strong></span>
+                  <div className="pt-2 flex items-center gap-1.5 text-[11px] text-slate-600 border-t border-slate-100">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                    <span className="truncate">Cultivated by <strong>{prod.farmer?.farm_name || 'Local Farm'}</strong></span>
                   </div>
                 </div>
               </div>
@@ -298,13 +307,16 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenProductDet
               {/* Price & Add to Cart */}
               <div className="p-5 pt-0 flex items-center justify-between border-t border-slate-100 mt-2">
                 <div>
-                  <span className="text-lg font-black text-slate-950">₹{prod.price}</span>
-                  <span className="text-xs text-slate-500"> / {prod.unit}</span>
+                  <div className="flex items-baseline gap-1">
+                    <span className="text-xl font-black text-slate-950">₹{prod.price}</span>
+                    <span className="text-xs text-slate-500 font-medium">/{prod.unit}</span>
+                  </div>
                 </div>
                 <button
                   onClick={() => addToCart(prod, 1)}
-                  className="px-4 py-2 rounded-xl bg-farm-800 hover:bg-farm-900 text-white font-bold text-xs flex items-center gap-1.5 shadow-sm transition active:scale-95"
+                  className="px-4 py-2 rounded-xl bg-farm-800 hover:bg-farm-900 text-white font-bold text-xs flex items-center gap-1.5 shadow-sm transition active:scale-95 focus-visible:ring-2 focus-visible:ring-farm-600 focus-visible:outline-hidden"
                 >
+                  <ShoppingBag className="w-3.5 h-3.5" />
                   <span>Add to Basket</span>
                 </button>
               </div>

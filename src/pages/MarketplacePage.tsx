@@ -267,25 +267,26 @@ export const MarketplacePage: React.FC<MarketplacePageProps> = ({
             return (
               <div
                 key={prod.id}
-                className="group bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-xs hover:shadow-xl hover:border-farm-300 transition duration-200 flex flex-col justify-between"
+                className="group bg-white rounded-3xl overflow-hidden border border-slate-200/90 shadow-xs hover:shadow-xl hover:border-farm-400 transition-all duration-200 flex flex-col justify-between"
               >
                 <div>
                   {/* Image & Tags */}
                   <div
                     onClick={() => onOpenProductDetail(prod)}
-                    className="relative h-48 overflow-hidden cursor-pointer"
+                    className="relative h-48 overflow-hidden cursor-pointer bg-slate-100"
                   >
                     <img
                       src={prod.image_url}
                       alt={prod.name}
                       className="w-full h-full object-cover group-hover:scale-105 transition duration-300"
+                      loading="lazy"
                     />
-                    <div className="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-md px-2 py-0.5 rounded-full text-[10px] font-bold text-farm-900 shadow-xs flex items-center gap-1">
+                    <div className="absolute top-2.5 left-2.5 bg-white/95 backdrop-blur-md px-2.5 py-1 rounded-full text-[10px] font-bold text-farm-900 shadow-xs flex items-center gap-1 border border-slate-100">
                       <MapPin className="w-3 h-3 text-farm-700" />
                       <span>{prod.farmer?.locality || 'Mira Bhayandar'}</span>
                     </div>
 
-                    <div className="absolute bottom-2.5 right-2.5 bg-farm-900/90 text-white px-2 py-0.5 rounded-full text-[10px] font-medium backdrop-blur-md">
+                    <div className="absolute bottom-2.5 right-2.5 bg-farm-950/90 text-white px-2.5 py-1 rounded-full text-[10px] font-semibold backdrop-blur-md border border-white/10 shadow-xs">
                       Harvest: {new Date(prod.harvest_date).toLocaleDateString('en-IN', { month: 'short', day: 'numeric' })}
                     </div>
                   </div>
@@ -293,8 +294,16 @@ export const MarketplacePage: React.FC<MarketplacePageProps> = ({
                   {/* Body Content */}
                   <div className="p-4 space-y-2">
                     <div className="flex items-center justify-between text-[11px]">
-                      <span className="font-semibold text-farm-700">{prod.category?.name}</span>
-                      <span className="text-[10px] text-emerald-800 font-medium bg-emerald-50 px-2 py-0.5 rounded-full">
+                      <span className="font-bold text-farm-800 bg-farm-50 px-2 py-0.5 rounded-md border border-farm-200/60">
+                        {prod.category?.name}
+                      </span>
+                      <span
+                        className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
+                          prod.available_quantity <= 10
+                            ? 'bg-amber-50 text-amber-900 border border-amber-200'
+                            : 'bg-emerald-50 text-emerald-900 border border-emerald-200'
+                        }`}
+                      >
                         {prod.available_quantity} {prod.unit} left
                       </span>
                     </div>
@@ -306,12 +315,13 @@ export const MarketplacePage: React.FC<MarketplacePageProps> = ({
                       {prod.name}
                     </h3>
 
-                    <p className="text-[11px] text-slate-500 line-clamp-2 leading-relaxed">
+                    <p className="text-[11px] text-slate-600 line-clamp-2 leading-relaxed">
                       {prod.description}
                     </p>
 
-                    <div className="pt-1 text-[10px] text-slate-600 font-medium truncate">
-                      🚜 {prod.farmer?.farm_name || 'Local Farm'}
+                    <div className="pt-1.5 flex items-center gap-1.5 text-[10px] text-slate-600 font-medium truncate border-t border-slate-100">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                      <span className="truncate">{prod.farmer?.farm_name || 'Local Farm'}</span>
                     </div>
                   </div>
                 </div>
@@ -319,15 +329,18 @@ export const MarketplacePage: React.FC<MarketplacePageProps> = ({
                 {/* Bottom Row */}
                 <div className="p-4 pt-0 border-t border-slate-100 flex items-center justify-between mt-2">
                   <div>
-                    <span className="text-base font-black text-slate-950">₹{prod.price}</span>
-                    <span className="text-[10px] text-slate-500"> / {prod.unit}</span>
+                    <div className="flex items-baseline gap-1">
+                      <span className="text-lg font-black text-slate-950">₹{prod.price}</span>
+                      <span className="text-[11px] text-slate-500 font-medium">/{prod.unit}</span>
+                    </div>
                   </div>
 
                   {inCart ? (
                     <div className="flex items-center border border-farm-700 rounded-xl bg-farm-50 overflow-hidden shadow-xs">
                       <button
                         onClick={() => updateQuantity(prod.id, inCart.quantity - 1)}
-                        className="px-2 py-1 text-farm-800 hover:bg-farm-100 transition"
+                        className="px-2.5 py-1 text-farm-800 hover:bg-farm-100 transition active:scale-90"
+                        aria-label="Decrease quantity"
                       >
                         <Minus className="w-3 h-3" />
                       </button>
@@ -335,7 +348,8 @@ export const MarketplacePage: React.FC<MarketplacePageProps> = ({
                       <button
                         onClick={() => updateQuantity(prod.id, inCart.quantity + 1)}
                         disabled={inCart.quantity >= prod.available_quantity}
-                        className="px-2 py-1 text-farm-800 hover:bg-farm-100 disabled:opacity-30 transition"
+                        className="px-2.5 py-1 text-farm-800 hover:bg-farm-100 disabled:opacity-30 transition active:scale-90"
+                        aria-label="Increase quantity"
                       >
                         <Plus className="w-3 h-3" />
                       </button>
@@ -344,7 +358,7 @@ export const MarketplacePage: React.FC<MarketplacePageProps> = ({
                     <button
                       onClick={() => addToCart(prod, 1)}
                       disabled={prod.available_quantity <= 0}
-                      className="px-3.5 py-1.5 rounded-xl bg-farm-800 hover:bg-farm-900 text-white font-bold text-xs flex items-center gap-1.5 shadow-xs transition active:scale-95 disabled:opacity-40"
+                      className="px-4 py-2 rounded-xl bg-farm-800 hover:bg-farm-900 text-white font-bold text-xs flex items-center gap-1.5 shadow-sm transition active:scale-95 disabled:opacity-40 focus-visible:ring-2 focus-visible:ring-farm-600 focus-visible:outline-hidden"
                     >
                       <ShoppingBag className="w-3.5 h-3.5" />
                       <span>Add</span>
