@@ -2,7 +2,7 @@ import { Profile, FarmerProfile, Category, Product, Address, DeliverySlot, Order
 
 export const SEED_PROFILES: Profile[] = [
   {
-    id: 'usr-consumer-1',
+    id: '11111111-1111-4111-a111-111111111111',
     full_name: 'Aaditya Sharma',
     phone: '+91 98201 12345',
     role: 'consumer',
@@ -10,7 +10,7 @@ export const SEED_PROFILES: Profile[] = [
     updated_at: '2026-10-15T10:00:00Z',
   },
   {
-    id: 'usr-farmer-1',
+    id: '22222222-2222-4222-a222-222222222221',
     full_name: 'Bhaskar Patil',
     phone: '+91 98202 23456',
     role: 'farmer',
@@ -18,7 +18,7 @@ export const SEED_PROFILES: Profile[] = [
     updated_at: '2026-09-10T08:30:00Z',
   },
   {
-    id: 'usr-farmer-2',
+    id: '22222222-2222-4222-a222-222222222222',
     full_name: 'Rajesh Mhatre',
     phone: '+91 98203 34567',
     role: 'farmer',
@@ -26,7 +26,7 @@ export const SEED_PROFILES: Profile[] = [
     updated_at: '2026-09-12T09:15:00Z',
   },
   {
-    id: 'usr-farmer-3',
+    id: '22222222-2222-4222-a222-222222222223',
     full_name: 'Sunita Tare',
     phone: '+91 98204 45678',
     role: 'farmer',
@@ -34,7 +34,7 @@ export const SEED_PROFILES: Profile[] = [
     updated_at: '2026-09-15T11:00:00Z',
   },
   {
-    id: 'usr-admin-1',
+    id: '33333333-3333-4333-a333-333333333331',
     full_name: 'Mira Bhayandar Agrico Admin',
     phone: '+91 98200 00001',
     role: 'admin',
@@ -45,8 +45,8 @@ export const SEED_PROFILES: Profile[] = [
 
 export const SEED_FARMERS: FarmerProfile[] = [
   {
-    id: 'farmer-1',
-    user_id: 'usr-farmer-1',
+    id: '44444444-4444-4444-a444-444444444441',
+    user_id: '22222222-2222-4222-a222-222222222221',
     farm_name: 'Uttan Coastal Agro',
     description: 'Third-generation organic coastal farm in Uttan village cultivating mineral-rich green vegetables, sweet potatoes, and coastal coconuts without synthetic pesticides.',
     locality: 'Uttan',
@@ -57,8 +57,8 @@ export const SEED_FARMERS: FarmerProfile[] = [
     created_at: '2026-09-10T08:35:00Z',
   },
   {
-    id: 'farmer-2',
-    user_id: 'usr-farmer-2',
+    id: '44444444-4444-4444-a444-444444444442',
+    user_id: '22222222-2222-4222-a222-222222222222',
     farm_name: 'Dongri Hillside Orchards',
     description: 'Terraced orchard located on the Dongri slopes utilizing drip irrigation and natural compost for tree-ripened papayas, bananas, and native gourds.',
     locality: 'Dongri',
@@ -69,8 +69,8 @@ export const SEED_FARMERS: FarmerProfile[] = [
     created_at: '2026-09-12T09:20:00Z',
   },
   {
-    id: 'farmer-3',
-    user_id: 'usr-farmer-3',
+    id: '44444444-4444-4444-a444-444444444443',
+    user_id: '22222222-2222-4222-a222-222222222223',
     farm_name: 'Rai-Morva Natural Farms',
     description: 'Community farm cooperative between Rai and Morva cultivating traditional Marathi heirloom leafy greens like palak, methi, and tender bhindi picked at daybreak.',
     locality: 'Rai & Morva',
@@ -84,35 +84,35 @@ export const SEED_FARMERS: FarmerProfile[] = [
 
 export const SEED_CATEGORIES: Category[] = [
   {
-    id: 'cat-leafy',
+    id: '55555555-5555-4555-a555-555555555551',
     name: 'Leafy Greens & Herbs',
     slug: 'leafy-greens',
     image_url: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=600&q=80',
     is_active: true,
   },
   {
-    id: 'cat-veggies',
+    id: '55555555-5555-4555-a555-555555555552',
     name: 'Daily Fresh Vegetables',
     slug: 'daily-vegetables',
     image_url: 'https://images.unsplash.com/photo-1597362925123-77861d3fbac7?auto=format&fit=crop&w=600&q=80',
     is_active: true,
   },
   {
-    id: 'cat-fruits',
+    id: '55555555-5555-4555-a555-555555555553',
     name: 'Farm Fresh Fruits',
     slug: 'farm-fruits',
     image_url: 'https://images.unsplash.com/photo-1619566636858-adf3ef46400b?auto=format&fit=crop&w=600&q=80',
     is_active: true,
   },
   {
-    id: 'cat-roots',
+    id: '55555555-5555-4555-a555-555555555554',
     name: 'Roots & Tubers',
     slug: 'roots-tubers',
     image_url: 'https://images.unsplash.com/photo-1518977676601-b53f82aba655?auto=format&fit=crop&w=600&q=80',
     is_active: true,
   },
   {
-    id: 'cat-grains',
+    id: '55555555-5555-4555-a555-555555555555',
     name: 'Farm Grains & Rice',
     slug: 'grains-staples',
     image_url: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=600&q=80',
@@ -122,9 +122,9 @@ export const SEED_CATEGORIES: Category[] = [
 
 export const SEED_PRODUCTS: Product[] = [
   {
-    id: 'prod-1',
-    farmer_id: 'farmer-3',
-    category_id: 'cat-leafy',
+    id: '66666666-6666-4666-a666-666666666601',
+    farmer_id: '44444444-4444-4444-a444-444444444443',
+    category_id: '55555555-5555-4555-a555-555555555551',
     name: 'Desi Organic Palak (पालक)',
     description: 'Crisp, earthy, nutrient-dense spinach leaves freshly hand-harvested at 5:00 AM from Morva fields. Zero chemical sprays.',
     image_url: 'https://images.unsplash.com/photo-1576045057995-568f588f82fb?auto=format&fit=crop&w=600&q=80',
@@ -137,9 +137,9 @@ export const SEED_PRODUCTS: Product[] = [
     updated_at: '2026-10-27T06:00:00Z',
   },
   {
-    id: 'prod-2',
-    farmer_id: 'farmer-3',
-    category_id: 'cat-leafy',
+    id: '66666666-6666-4666-a666-666666666602',
+    farmer_id: '44444444-4444-4444-a444-444444444443',
+    category_id: '55555555-5555-4555-a555-555555555551',
     name: 'Fresh Rai Methi (मेथी)',
     description: 'Aromatic small-leaf desi methi grown using well-water in Rai village. Perfect for Gujarati Theplas and Aloo Methi.',
     image_url: 'https://images.unsplash.com/photo-1509358271058-acd22cc93898?auto=format&fit=crop&w=600&q=80',
@@ -152,9 +152,9 @@ export const SEED_PRODUCTS: Product[] = [
     updated_at: '2026-10-27T06:00:00Z',
   },
   {
-    id: 'prod-3',
-    farmer_id: 'farmer-3',
-    category_id: 'cat-veggies',
+    id: '66666666-6666-4666-a666-666666666603',
+    farmer_id: '44444444-4444-4444-a444-444444444443',
+    category_id: '55555555-5555-4555-a555-555555555552',
     name: 'Tender Morva Bhindi (भेंडी)',
     description: 'Slender, snap-fresh green okra with tiny seeds. Crisp texture that cooks without excess slime.',
     image_url: 'https://images.unsplash.com/photo-1425543103986-22abb7d7e8d2?auto=format&fit=crop&w=600&q=80',
@@ -167,9 +167,9 @@ export const SEED_PRODUCTS: Product[] = [
     updated_at: '2026-10-27T07:00:00Z',
   },
   {
-    id: 'prod-4',
-    farmer_id: 'farmer-1',
-    category_id: 'cat-veggies',
+    id: '66666666-6666-4666-a666-666666666604',
+    farmer_id: '44444444-4444-4444-a444-444444444441',
+    category_id: '55555555-5555-4555-a555-555555555552',
     name: 'Uttan Round Brinjals (काळी वांगी)',
     description: 'Glossy purple coastal brinjals with tender seedless flesh, grown specifically for authentic Maharashtrian Bharli Vangi.',
     image_url: 'https://images.unsplash.com/photo-1528825871115-3581a5387919?auto=format&fit=crop&w=600&q=80',
@@ -182,9 +182,9 @@ export const SEED_PRODUCTS: Product[] = [
     updated_at: '2026-10-26T08:00:00Z',
   },
   {
-    id: 'prod-5',
-    farmer_id: 'farmer-2',
-    category_id: 'cat-fruits',
+    id: '66666666-6666-4666-a666-666666666605',
+    farmer_id: '44444444-4444-4444-a444-444444444442',
+    category_id: '55555555-5555-4555-a555-555555555553',
     name: 'Dongri Natural Ripe Papaya (पपई)',
     description: 'Tree-ripened golden sweet papaya grown naturally without carbide or chemical ripening agents. High in vitamin C.',
     image_url: 'https://images.unsplash.com/photo-1517282009859-f000ec3b26fe?auto=format&fit=crop&w=600&q=80',
@@ -197,9 +197,9 @@ export const SEED_PRODUCTS: Product[] = [
     updated_at: '2026-10-27T09:00:00Z',
   },
   {
-    id: 'prod-6',
-    farmer_id: 'farmer-1',
-    category_id: 'cat-fruits',
+    id: '66666666-6666-4666-a666-666666666606',
+    farmer_id: '44444444-4444-4444-a444-444444444441',
+    category_id: '55555555-5555-4555-a555-555555555553',
     name: 'Fresh Uttan Tender Coconut (शहाळे)',
     description: 'Directly plucked from coastal grove palm trees in Uttan with 400ml+ refreshing sweet electrolyte-rich water and soft malai.',
     image_url: 'https://images.unsplash.com/photo-1525385133512-2f3bdd039054?auto=format&fit=crop&w=600&q=80',
@@ -212,9 +212,9 @@ export const SEED_PRODUCTS: Product[] = [
     updated_at: '2026-10-27T10:00:00Z',
   },
   {
-    id: 'prod-7',
-    farmer_id: 'farmer-1',
-    category_id: 'cat-roots',
+    id: '66666666-6666-4666-a666-666666666607',
+    farmer_id: '44444444-4444-4444-a444-444444444441',
+    category_id: '55555555-5555-4555-a555-555555555554',
     name: 'Red Soil Sweet Potatoes (रताळी)',
     description: 'Naturally sweet tubers rich in dietary fiber and vitamins harvested from the porous coastal soil of Gorai-Uttan.',
     image_url: 'https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=600&q=80',
@@ -227,9 +227,9 @@ export const SEED_PRODUCTS: Product[] = [
     updated_at: '2026-10-25T10:00:00Z',
   },
   {
-    id: 'prod-8',
-    farmer_id: 'farmer-3',
-    category_id: 'cat-leafy',
+    id: '66666666-6666-4666-a666-666666666608',
+    farmer_id: '44444444-4444-4444-a444-444444444443',
+    category_id: '55555555-5555-4555-a555-555555555551',
     name: 'Aromatic Desi Kothimbir (Coriander)',
     description: 'Intensely fragrant fresh coriander with root-soil integrity preserved to maintain freshness for up to 5 days in your kitchen.',
     image_url: 'https://images.unsplash.com/photo-1596797038530-2c107229654b?auto=format&fit=crop&w=600&q=80',
@@ -242,9 +242,9 @@ export const SEED_PRODUCTS: Product[] = [
     updated_at: '2026-10-27T06:30:00Z',
   },
   {
-    id: 'prod-9',
-    farmer_id: 'farmer-2',
-    category_id: 'cat-veggies',
+    id: '66666666-6666-4666-a666-666666666609',
+    farmer_id: '44444444-4444-4444-a444-444444444442',
+    category_id: '55555555-5555-4555-a555-555555555552',
     name: 'Farm Fresh Ridge Gourd (Turai)',
     description: 'Tender ridge gourd with sweet natural moisture, harvested daily from bamboo trellises at Dongri slopes.',
     image_url: 'https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?auto=format&fit=crop&w=600&q=80',
@@ -257,9 +257,9 @@ export const SEED_PRODUCTS: Product[] = [
     updated_at: '2026-10-27T11:00:00Z',
   },
   {
-    id: 'prod-10',
-    farmer_id: 'farmer-2',
-    category_id: 'cat-grains',
+    id: '66666666-6666-4666-a666-666666666610',
+    farmer_id: '44444444-4444-4444-a444-444444444442',
+    category_id: '55555555-5555-4555-a555-555555555555',
     name: 'Palghar Wada Kolam Raw Rice',
     description: 'Aromatic short-grain heritage Maharashtrian rice grown by local allied farmer collectives, naturally aged for 12 months.',
     image_url: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=600&q=80',
@@ -275,8 +275,8 @@ export const SEED_PRODUCTS: Product[] = [
 
 export const SEED_ADDRESSES: Address[] = [
   {
-    id: 'addr-1',
-    consumer_id: 'usr-consumer-1',
+    id: '88888888-8888-4888-a888-888888888801',
+    consumer_id: '11111111-1111-4111-a111-111111111111',
     address_label: 'Home',
     recipient_name: 'Aaditya Sharma',
     phone: '+91 98201 12345',
@@ -290,8 +290,8 @@ export const SEED_ADDRESSES: Address[] = [
     created_at: '2026-10-16T12:00:00Z',
   },
   {
-    id: 'addr-2',
-    consumer_id: 'usr-consumer-1',
+    id: '88888888-8888-4888-a888-888888888802',
+    consumer_id: '11111111-1111-4111-a111-111111111111',
     address_label: 'Office',
     recipient_name: 'Aaditya Sharma',
     phone: '+91 98201 12345',
@@ -308,7 +308,7 @@ export const SEED_ADDRESSES: Address[] = [
 
 export const SEED_DELIVERY_SLOTS: DeliverySlot[] = [
   {
-    id: 'slot-1',
+    id: '77777777-7777-4777-a777-777777777701',
     delivery_date: '2026-10-28',
     start_time: '07:00:00',
     end_time: '10:00:00',
@@ -318,7 +318,7 @@ export const SEED_DELIVERY_SLOTS: DeliverySlot[] = [
     remaining_capacity: 18,
   },
   {
-    id: 'slot-2',
+    id: '77777777-7777-4777-a777-777777777702',
     delivery_date: '2026-10-28',
     start_time: '16:30:00',
     end_time: '19:30:00',
@@ -328,7 +328,7 @@ export const SEED_DELIVERY_SLOTS: DeliverySlot[] = [
     remaining_capacity: 14,
   },
   {
-    id: 'slot-3',
+    id: '77777777-7777-4777-a777-777777777703',
     delivery_date: '2026-10-28',
     start_time: '07:30:00',
     end_time: '10:30:00',
@@ -338,7 +338,7 @@ export const SEED_DELIVERY_SLOTS: DeliverySlot[] = [
     remaining_capacity: 12,
   },
   {
-    id: 'slot-4',
+    id: '77777777-7777-4777-a777-777777777704',
     delivery_date: '2026-10-29',
     start_time: '07:00:00',
     end_time: '10:00:00',
@@ -351,10 +351,10 @@ export const SEED_DELIVERY_SLOTS: DeliverySlot[] = [
 
 export const SEED_ORDERS: Order[] = [
   {
-    id: 'ord-1001',
-    consumer_id: 'usr-consumer-1',
-    address_id: 'addr-1',
-    delivery_slot_id: 'slot-1',
+    id: '99999999-9999-4999-a999-999999999901',
+    consumer_id: '11111111-1111-4111-a111-111111111111',
+    address_id: '88888888-8888-4888-a888-888888888801',
+    delivery_slot_id: '77777777-7777-4777-a777-777777777701',
     order_number: 'F2H-20261027-0104',
     status: 'preparing',
     subtotal: 155,
@@ -367,10 +367,10 @@ export const SEED_ORDERS: Order[] = [
     updated_at: '2026-10-27T09:30:00Z',
   },
   {
-    id: 'ord-1002',
-    consumer_id: 'usr-consumer-1',
-    address_id: 'addr-1',
-    delivery_slot_id: 'slot-2',
+    id: '99999999-9999-4999-a999-999999999902',
+    consumer_id: '11111111-1111-4111-a111-111111111111',
+    address_id: '88888888-8888-4888-a888-888888888801',
+    delivery_slot_id: '77777777-7777-4777-a777-777777777702',
     order_number: 'F2H-20261025-0089',
     status: 'delivered',
     subtotal: 215,
@@ -386,10 +386,10 @@ export const SEED_ORDERS: Order[] = [
 
 export const SEED_ORDER_ITEMS: OrderItem[] = [
   {
-    id: 'item-1',
-    order_id: 'ord-1001',
-    product_id: 'prod-1',
-    farmer_id: 'farmer-3',
+    id: 'aaaaaaaa-aaaa-4aaa-aaaa-aaaaaaaaaaa1',
+    order_id: '99999999-9999-4999-a999-999999999901',
+    product_id: '66666666-6666-4666-a666-666666666601',
+    farmer_id: '44444444-4444-4444-a444-444444444443',
     product_name_snapshot: 'Desi Organic Palak (Spinach)',
     unit_price: 30,
     quantity: 2,
@@ -398,10 +398,10 @@ export const SEED_ORDER_ITEMS: OrderItem[] = [
     created_at: '2026-10-27T08:15:00Z',
   },
   {
-    id: 'item-2',
-    order_id: 'ord-1001',
-    product_id: 'prod-4',
-    farmer_id: 'farmer-1',
+    id: 'aaaaaaaa-aaaa-4aaa-aaaa-aaaaaaaaaaa2',
+    order_id: '99999999-9999-4999-a999-999999999901',
+    product_id: '66666666-6666-4666-a666-666666666604',
+    farmer_id: '44444444-4444-4444-a444-444444444441',
     product_name_snapshot: 'Uttan Round Brinjals (Vangi)',
     unit_price: 35,
     quantity: 1,
@@ -410,10 +410,10 @@ export const SEED_ORDER_ITEMS: OrderItem[] = [
     created_at: '2026-10-27T08:15:00Z',
   },
   {
-    id: 'item-3',
-    order_id: 'ord-1001',
-    product_id: 'prod-5',
-    farmer_id: 'farmer-2',
+    id: 'aaaaaaaa-aaaa-4aaa-aaaa-aaaaaaaaaaa3',
+    order_id: '99999999-9999-4999-a999-999999999901',
+    product_id: '66666666-6666-4666-a666-666666666605',
+    farmer_id: '44444444-4444-4444-a444-444444444442',
     product_name_snapshot: 'Dongri Natural Ripe Papaya',
     unit_price: 60,
     quantity: 1,
@@ -422,10 +422,10 @@ export const SEED_ORDER_ITEMS: OrderItem[] = [
     created_at: '2026-10-27T08:15:00Z',
   },
   {
-    id: 'item-4',
-    order_id: 'ord-1002',
-    product_id: 'prod-6',
-    farmer_id: 'farmer-1',
+    id: 'aaaaaaaa-aaaa-4aaa-aaaa-aaaaaaaaaaa4',
+    order_id: '99999999-9999-4999-a999-999999999902',
+    product_id: '66666666-6666-4666-a666-666666666606',
+    farmer_id: '44444444-4444-4444-a444-444444444441',
     product_name_snapshot: 'Fresh Uttan Tender Coconut (Shahad)',
     unit_price: 55,
     quantity: 2,
@@ -434,10 +434,10 @@ export const SEED_ORDER_ITEMS: OrderItem[] = [
     created_at: '2026-10-25T11:20:00Z',
   },
   {
-    id: 'item-5',
-    order_id: 'ord-1002',
-    product_id: 'prod-10',
-    farmer_id: 'farmer-2',
+    id: 'aaaaaaaa-aaaa-4aaa-aaaa-aaaaaaaaaaa5',
+    order_id: '99999999-9999-4999-a999-999999999902',
+    product_id: '66666666-6666-4666-a666-666666666610',
+    farmer_id: '44444444-4444-4444-a444-444444444442',
     product_name_snapshot: 'Palghar Wada Kolam Raw Rice',
     unit_price: 95,
     quantity: 1,
@@ -446,10 +446,10 @@ export const SEED_ORDER_ITEMS: OrderItem[] = [
     created_at: '2026-10-25T11:20:00Z',
   },
   {
-    id: 'item-6',
-    order_id: 'ord-1002',
-    product_id: 'prod-8',
-    farmer_id: 'farmer-3',
+    id: 'aaaaaaaa-aaaa-4aaa-aaaa-aaaaaaaaaaa6',
+    order_id: '99999999-9999-4999-a999-999999999902',
+    product_id: '66666666-6666-4666-a666-666666666608',
+    farmer_id: '44444444-4444-4444-a444-444444444443',
     product_name_snapshot: 'Aromatic Desi Kothimbir (Coriander)',
     unit_price: 20,
     quantity: 1,
@@ -461,20 +461,20 @@ export const SEED_ORDER_ITEMS: OrderItem[] = [
 
 export const SEED_REVIEWS: Review[] = [
   {
-    id: 'rev-1',
-    order_item_id: 'item-4',
-    consumer_id: 'usr-consumer-1',
-    product_id: 'prod-6',
+    id: 'bbbbbbbb-bbbb-4bbb-abbb-bbbbbbbbbbb1',
+    order_item_id: 'aaaaaaaa-aaaa-4aaa-aaaa-aaaaaaaaaaa4',
+    consumer_id: '11111111-1111-4111-a111-111111111111',
+    product_id: '66666666-6666-4666-a666-666666666606',
     rating: 5,
     comment: 'The tender coconuts from Uttan were incredibly sweet with plenty of soft malai! Way fresher than anything from the local vegetable market.',
     created_at: '2026-10-26T20:00:00Z',
     consumer_name: 'Aaditya S.',
   },
   {
-    id: 'rev-2',
-    order_item_id: 'item-5',
-    consumer_id: 'usr-consumer-1',
-    product_id: 'prod-10',
+    id: 'bbbbbbbb-bbbb-4bbb-abbb-bbbbbbbbbbb2',
+    order_item_id: 'aaaaaaaa-aaaa-4aaa-aaaa-aaaaaaaaaaa5',
+    consumer_id: '11111111-1111-4111-a111-111111111111',
+    product_id: '66666666-6666-4666-a666-666666666610',
     rating: 5,
     comment: 'Authentic fragrant Wada Kolam rice. Knowing it supports farmers in our neighboring Dongri-Palghar belt makes it even better.',
     created_at: '2026-10-26T20:05:00Z',

@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Profile, FarmerProfile, UserRole } from '../types';
 import { supabase, isSupabaseConfigured } from '../lib/supabase';
-import { demoDb, api } from '../services/api';
+import { demoDb, api, isUUID } from '../services/api';
 
 interface AuthContextType {
   user: Profile | null;
@@ -30,7 +30,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const saved = localStorage.getItem('f2h_active_user');
     if (saved) {
       try {
-        return JSON.parse(saved);
+        const parsed = JSON.parse(saved);
+        if (parsed?.id && isUUID(parsed.id)) return parsed;
+        // If an old legacy non-UUID format was saved, upgrade to valid UUID
+        const found = demoDb.profiles.find((p) => p.role === parsed?.role) || demoDb.profiles[0];
+        return found;
       } catch {
         return demoDb.profiles[0];
       }
@@ -144,7 +148,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     locality?: string;
     farmAddress?: string;
   }) => {
-    const newUserId = 'usr-' + Date.now();
+    const newUserId = typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : '11111111-1111-4111-a111-' + Date.now().toString(16).padStart(12, '0');
     const newProfile: Profile = {
       id: newUserId,
       full_name: data.fullName,
@@ -156,9 +160,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     demoDb.profiles.push(newProfile);
 
+    let createdFarmer: FarmerProfile | null = null;
     if (data.role === 'farmer') {
-      const newFarmer: FarmerProfile = {
-        id: 'farmer-' + Date.now(),
+      const farmerId = typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : '44444444-4444-4444-a444-' + Date.now().toString(16).padStart(12, '0');
+      createdFarmer = {
+        id: farmerId,
         user_id: newUserId,
         farm_name: data.farmName || `${data.fullName}'s Farm`,
         description: 'Authentic local farming collective near Mira Bhayandar.',
@@ -166,14 +172,27 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         address: data.farmAddress || 'Bhayandar Coastal Farmland',
         latitude: 19.28 + (Math.random() - 0.5) * 0.04,
         longitude: 72.80 + (Math.random() - 0.5) * 0.04,
-        verification_status: 'verified', // Auto-verify for demo convenience
+        verification_status: 'verified', // Auto-verify for evaluation convenience
         created_at: new Date().toISOString(),
       };
-      demoDb.farmers.push(newFarmer);
-      setFarmerProfile(newFarmer);
+      demoDb.farmers.push(createdFarmer);
+      setFarmerProfile(createdFarmer);
     }
 
     demoDb.persist();
+
+    // If live Supabase is configured, sync profile and farmer record to live DB
+    if (isSupabaseConfigured && supabase) {
+      try {
+        await supabase.from('profiles').insert(newProfile);
+        if (createdFarmer) {
+          await supabase.from('farmer_profiles').insert(createdFarmer);
+        }
+      } catch (err) {
+        console.warn('Could not sync newly registered user to Supabase:', err);
+      }
+    }
+
     setUser(newProfile);
   };
 
