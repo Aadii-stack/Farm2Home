@@ -85,30 +85,46 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const loginAsDemoRole = (targetRole: UserRole, specificFarmerId?: string) => {
+    let targetUser: Profile | null = null;
+    let targetFarmer: FarmerProfile | null = null;
+
     if (targetRole === 'consumer') {
-      const consumer = demoDb.profiles.find((p) => p.role === 'consumer') || demoDb.profiles[0];
-      setUser(consumer);
+      targetUser = demoDb.profiles.find((p) => p.role === 'consumer') || demoDb.profiles[0];
+      setUser(targetUser);
       setFarmerProfile(null);
     } else if (targetRole === 'farmer') {
-      const targetFarmer = specificFarmerId
-        ? demoDb.farmers.find((f) => f.id === specificFarmerId)
+      const selectedFarmer = specificFarmerId
+        ? demoDb.farmers.find((f) => f.id === specificFarmerId) || demoDb.farmers[0]
         : demoDb.farmers[0];
-      if (targetFarmer) {
-        const farmerUser = demoDb.profiles.find((p) => p.id === targetFarmer.user_id) || {
-          id: targetFarmer.user_id,
+      targetFarmer = selectedFarmer;
+      if (selectedFarmer) {
+        targetUser = demoDb.profiles.find((p) => p.id === selectedFarmer.user_id) || {
+          id: selectedFarmer.user_id,
           full_name: 'Bhaskar Patil',
           phone: '+91 98202 23456',
           role: 'farmer' as UserRole,
           created_at: new Date().toISOString(),
           updated_at: new Date().toISOString(),
         };
-        setUser(farmerUser);
-        setFarmerProfile(targetFarmer);
+        setUser(targetUser);
+        setFarmerProfile(selectedFarmer);
       }
     } else if (targetRole === 'admin') {
-      const admin = demoDb.profiles.find((p) => p.role === 'admin') || demoDb.profiles[4];
-      setUser(admin);
+      targetUser = demoDb.profiles.find((p) => p.role === 'admin') || demoDb.profiles[4];
+      setUser(targetUser);
       setFarmerProfile(null);
+    }
+
+    // Automatically sync active demo profile to Supabase if configured
+    if (isSupabaseConfigured && supabase && targetUser && isUUID(targetUser.id)) {
+      supabase.from('profiles').upsert(targetUser).then(({ error }) => {
+        if (error) console.warn('Could not sync user to Supabase profiles:', error.message);
+      });
+      if (targetFarmer && isUUID(targetFarmer.id)) {
+        supabase.from('farmer_profiles').upsert(targetFarmer).then(({ error }) => {
+          if (error) console.warn('Could not sync farmer to Supabase farmer_profiles:', error.message);
+        });
+      }
     }
   };
 

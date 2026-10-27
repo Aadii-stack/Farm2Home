@@ -39,7 +39,8 @@ BEGIN
     END IF;
 END $$;
 
-ALTER TABLE public.profiles ADD CONSTRAINT profiles_id_fkey FOREIGN KEY (id) REFERENCES auth.users(id) ON DELETE CASCADE DEFERRABLE INITIALLY DEFERRED;
+-- Keep foreign key dropped so seed and demo evaluation profiles can populate reliably without strict auth schema locks
+ALTER TABLE public.profiles DROP CONSTRAINT IF EXISTS profiles_id_fkey;
 
 -- -----------------------------------------------------------------------------
 -- 2. PUBLIC PROFILES
