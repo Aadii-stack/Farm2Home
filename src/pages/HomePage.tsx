@@ -75,9 +75,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenProductDet
                 <span>Direct from Mira Bhayandar Farmlands</span>
               </div>
 
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.15]">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.12]">
                 Fresh from Local Farms, <br className="hidden sm:inline" />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-lime-200 to-emerald-400">
+                <span className="text-emerald-300">
                   Delivered to Your Home.
                 </span>
               </h1>
@@ -91,7 +91,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenProductDet
                 onSubmit={handleSearchSubmit}
                 className="max-w-xl mx-auto lg:mx-0 flex items-center bg-white p-2 rounded-2xl shadow-xl border border-white/20"
               >
-                <div className="pl-3 text-slate-400">
+                <div className="pl-3 text-slate-500">
                   <Search className="w-5 h-5" />
                 </div>
                 <input
@@ -99,7 +99,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenProductDet
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search fresh spinach, methi, papayas, coconut..."
-                  className="w-full px-3 py-2 text-sm text-slate-900 bg-transparent placeholder-slate-400 focus:outline-hidden"
+                  className="w-full px-3 py-2 text-sm text-slate-900 bg-transparent placeholder-slate-500 focus:outline-hidden"
                 />
                 <button
                   type="submit"
@@ -112,15 +112,15 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenProductDet
               {/* Key Trust Metrics */}
               <div className="pt-4 grid grid-cols-3 gap-4 border-t border-farm-700/60 max-w-lg mx-auto lg:mx-0">
                 <div>
-                  <p className="text-2xl font-black text-white">0%</p>
+                  <p className="text-2xl font-black text-white tabular-nums tracking-tight">0%</p>
                   <p className="text-[11px] text-farm-200 font-medium">Broker Markups</p>
                 </div>
                 <div>
-                  <p className="text-2xl font-black text-white">4-6 Hrs</p>
+                  <p className="text-2xl font-black text-white tabular-nums tracking-tight">4-6 Hrs</p>
                   <p className="text-[11px] text-farm-200 font-medium">Harvest to Door</p>
                 </div>
                 <div>
-                  <p className="text-2xl font-black text-white">100%</p>
+                  <p className="text-2xl font-black text-white tabular-nums tracking-tight">100%</p>
                   <p className="text-[11px] text-farm-200 font-medium">Fair Farmer Payout</p>
                 </div>
               </div>
@@ -169,10 +169,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenProductDet
           <span className="text-xs font-extrabold uppercase tracking-widest text-farm-700 bg-farm-100 px-3 py-1 rounded-full">
             Transparent Supply Chain
           </span>
-          <h2 className="text-3xl font-extrabold text-slate-900">
+          <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">
             How Farm2Home Works
           </h2>
-          <p className="text-sm text-slate-600">
+          <p className="text-sm text-slate-600 leading-relaxed max-w-xl mx-auto">
             Eliminating 4 layers of APMC middlemen to guarantee fresher food for consumers and direct fair earnings for local cultivators.
           </p>
         </div>
@@ -180,10 +180,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenProductDet
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
           {/* Step 1 */}
           <div className="relative p-8 rounded-3xl bg-white border border-slate-200/80 shadow-xs hover:shadow-md transition space-y-4">
-            <div className="w-14 h-14 rounded-2xl bg-farm-100 text-farm-800 flex items-center justify-center font-black text-xl shadow-xs">
+            <div className="w-14 h-14 rounded-2xl bg-farm-100 text-farm-800 flex items-center justify-center font-black text-xl tabular-nums shadow-xs">
               1
             </div>
-            <h3 className="text-lg font-bold text-slate-900">Farmers List Daily Harvests</h3>
+            <h3 className="text-lg font-bold text-slate-900 tracking-tight">Farmers List Daily Harvests</h3>
             <p className="text-xs text-slate-600 leading-relaxed">
               Cultivators in Uttan, Dongri, and Morva publish actual available quantities each morning based on what has ripened naturally in their fields.
             </p>
@@ -195,10 +195,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenProductDet
 
           {/* Step 2 */}
           <div className="relative p-8 rounded-3xl bg-white border border-slate-200/80 shadow-xs hover:shadow-md transition space-y-4">
-            <div className="w-14 h-14 rounded-2xl bg-earth-100 text-earth-800 flex items-center justify-center font-black text-xl shadow-xs">
+            <div className="w-14 h-14 rounded-2xl bg-earth-100 text-earth-800 flex items-center justify-center font-black text-xl tabular-nums shadow-xs">
               2
             </div>
-            <h3 className="text-lg font-bold text-slate-900">Consumers Book Delivery Slots</h3>
+            <h3 className="text-lg font-bold text-slate-900 tracking-tight">Consumers Book Delivery Slots</h3>
             <p className="text-xs text-slate-600 leading-relaxed">
               Apartment residents across Mira Road and Bhayandar choose preferred morning (7-10 AM) or evening slots with full visibility into which farm harvested their basket.
             </p>
@@ -210,10 +210,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenProductDet
 
           {/* Step 3 */}
           <div className="relative p-8 rounded-3xl bg-white border border-slate-200/80 shadow-xs hover:shadow-md transition space-y-4">
-            <div className="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-black text-xl shadow-xs">
+            <div className="w-14 h-14 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-black text-xl tabular-nums shadow-xs">
               3
             </div>
-            <h3 className="text-lg font-bold text-slate-900">Direct Doorstep Fulfillment</h3>
+            <h3 className="text-lg font-bold text-slate-900 tracking-tight">Direct Doorstep Fulfillment</h3>
             <p className="text-xs text-slate-600 leading-relaxed">
               Produce is packed straight into eco-friendly bags and dispatched across Mira Bhayandar within 4-6 hours of harvest. Pay easily via Cash or UPI at your door.
             </p>
@@ -230,7 +230,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenProductDet
         <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-4">
           <div>
             <span className="text-xs font-bold uppercase tracking-wider text-farm-700">Today's Harvest Picks</span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
               Fresh from Mira Bhayandar Soil
             </h2>
           </div>
@@ -276,7 +276,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenProductDet
                       {prod.category?.name || 'Produce'}
                     </span>
                     <span
-                      className={`text-[10px] font-semibold px-2 py-0.5 rounded-full ${
+                      className={`text-[10px] font-semibold px-2 py-0.5 rounded-full tabular-nums ${
                         prod.available_quantity <= 10
                           ? 'bg-amber-50 text-amber-900 border border-amber-200'
                           : 'bg-emerald-50 text-emerald-900 border border-emerald-200'
@@ -308,7 +308,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenProductDet
               <div className="p-5 pt-0 flex items-center justify-between border-t border-slate-100 mt-2">
                 <div>
                   <div className="flex items-baseline gap-1">
-                    <span className="text-xl font-black text-slate-950">₹{prod.price}</span>
+                    <span className="text-xl font-black text-slate-950 tabular-nums">₹{prod.price}</span>
                     <span className="text-xs text-slate-500 font-medium">/{prod.unit}</span>
                   </div>
                 </div>
@@ -330,10 +330,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenProductDet
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-2xl mx-auto mb-12 space-y-2">
             <span className="text-xs font-bold uppercase tracking-wider text-farm-700">Meet Your Cultivators</span>
-            <h2 className="text-3xl font-extrabold text-slate-900">
+            <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">
               The Families Behind Your Food
             </h2>
-            <p className="text-sm text-slate-600">
+            <p className="text-sm text-slate-600 max-w-xl mx-auto leading-relaxed">
               Honest farmers near Mira Bhayandar practicing sustainable, eco-friendly crop cultivation.
             </p>
           </div>
@@ -350,7 +350,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenProductDet
                       {farmer.farm_name.charAt(0)}
                     </div>
                     <div>
-                      <h4 className="font-bold text-slate-900 text-base">{farmer.farm_name}</h4>
+                      <h4 className="font-bold text-slate-900 text-base tracking-tight">{farmer.farm_name}</h4>
                       <p className="text-xs text-farm-700 font-medium flex items-center gap-1">
                         <MapPin className="w-3 h-3" />
                         <span>{farmer.locality}, Mira Bhayandar</span>
@@ -388,10 +388,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenProductDet
               <span className="text-xs font-bold uppercase tracking-wider text-emerald-400">
                 Socioeconomic Impact
               </span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-snug">
                 Rebuilding Mira Bhayandar's Local Food Economy
               </h2>
-              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-xl">
                 Urban expansion often forces local peri-urban farmers off their ancestral lands. By connecting consumers in Mira Road and Bhayandar directly with cultivators in Uttan and Morva, Farm2Home provides stable, dignified agricultural livelihoods while cutting cold chain emissions.
               </p>
               <div className="pt-2 flex flex-wrap gap-4 text-xs font-medium text-emerald-300">
@@ -403,20 +403,20 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenProductDet
 
             <div className="grid grid-cols-2 gap-4">
               <div className="p-5 rounded-2xl bg-white/5 border border-white/10 text-center">
-                <p className="text-3xl font-black text-emerald-400">42%</p>
-                <p className="text-xs text-slate-300 mt-1">Average Income Increase for Local Farmers</p>
+                <p className="text-3xl font-black text-emerald-400 tabular-nums tracking-tight">42%</p>
+                <p className="text-xs text-slate-300 mt-1 font-medium">Average Income Increase for Local Farmers</p>
               </div>
               <div className="p-5 rounded-2xl bg-white/5 border border-white/10 text-center">
-                <p className="text-3xl font-black text-emerald-400">18+ Hrs</p>
-                <p className="text-xs text-slate-300 mt-1">Fresher than Mandi Supply Chains</p>
+                <p className="text-3xl font-black text-emerald-400 tabular-nums tracking-tight">18+ Hrs</p>
+                <p className="text-xs text-slate-300 mt-1 font-medium">Fresher than Mandi Supply Chains</p>
               </div>
               <div className="p-5 rounded-2xl bg-white/5 border border-white/10 text-center">
-                <p className="text-3xl font-black text-emerald-400">100%</p>
-                <p className="text-xs text-slate-300 mt-1">Pesticide Disclosures</p>
+                <p className="text-3xl font-black text-emerald-400 tabular-nums tracking-tight">100%</p>
+                <p className="text-xs text-slate-300 mt-1 font-medium">Pesticide Disclosures</p>
               </div>
               <div className="p-5 rounded-2xl bg-white/5 border border-white/10 text-center">
-                <p className="text-3xl font-black text-emerald-400">COD/UPI</p>
-                <p className="text-xs text-slate-300 mt-1">Transparent Doorstep Payment</p>
+                <p className="text-3xl font-black text-emerald-400 tabular-nums tracking-tight">COD/UPI</p>
+                <p className="text-xs text-slate-300 mt-1 font-medium">Transparent Doorstep Payment</p>
               </div>
             </div>
           </div>
@@ -427,42 +427,42 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenProductDet
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-xl mx-auto mb-10 space-y-2">
           <span className="text-xs font-bold uppercase tracking-wider text-farm-700">Community Feedback</span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
             What Mira Bhayandar Residents Say
           </h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="p-6 rounded-3xl bg-white border border-slate-200/80 shadow-xs space-y-3">
-            <div className="flex text-amber-500 gap-1 text-sm">★★★★★</div>
-            <p className="text-xs text-slate-600 italic leading-relaxed">
+            <div className="flex text-amber-500 gap-1 text-sm select-none" aria-label="5 out of 5 stars">★★★★★</div>
+            <p className="text-xs text-slate-700 italic leading-relaxed">
               "The Palak and Methi arrived still cool from the morning dewdrops! You can immediately taste the difference compared to vegetables sitting in market stalls for days."
             </p>
             <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
               <span className="font-bold text-slate-900">Pooja Dave</span>
-              <span className="text-slate-400">Shanti Nagar, Sector 4</span>
+              <span className="text-slate-500 font-medium">Shanti Nagar, Sector 4</span>
             </div>
           </div>
 
           <div className="p-6 rounded-3xl bg-white border border-slate-200/80 shadow-xs space-y-3">
-            <div className="flex text-amber-500 gap-1 text-sm">★★★★★</div>
-            <p className="text-xs text-slate-600 italic leading-relaxed">
+            <div className="flex text-amber-500 gap-1 text-sm select-none" aria-label="5 out of 5 stars">★★★★★</div>
+            <p className="text-xs text-slate-700 italic leading-relaxed">
               "Ordered tender coconuts and papayas from Uttan Coastal Agro. Arrived right on schedule in the 7-10 AM morning window. It feels great supporting our local farmers directly."
             </p>
             <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
               <span className="font-bold text-slate-900">Vikramaditya Jain</span>
-              <span className="text-slate-400">Kanakia Park, Mira Road</span>
+              <span className="text-slate-500 font-medium">Kanakia Park, Mira Road</span>
             </div>
           </div>
 
           <div className="p-6 rounded-3xl bg-white border border-slate-200/80 shadow-xs space-y-3">
-            <div className="flex text-amber-500 gap-1 text-sm">★★★★★</div>
-            <p className="text-xs text-slate-600 italic leading-relaxed">
+            <div className="flex text-amber-500 gap-1 text-sm select-none" aria-label="5 out of 5 stars">★★★★★</div>
+            <p className="text-xs text-slate-700 italic leading-relaxed">
               "The Wada Kolam rice and ridge gourd (turai) were exceptional quality. Transparent pricing in rupees, no artificial surges, and friendly delivery."
             </p>
             <div className="pt-2 border-t border-slate-100 flex items-center justify-between text-xs">
               <span className="font-bold text-slate-900">Sneha Patil</span>
-              <span className="text-slate-400">Navghar, Bhayandar East</span>
+              <span className="text-slate-500 font-medium">Navghar, Bhayandar East</span>
             </div>
           </div>
         </div>
@@ -474,57 +474,57 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenProductDet
           <div className="space-y-3">
             <div className="flex items-center gap-2">
               <Sprout className="w-5 h-5 text-farm-700" />
-              <span className="font-extrabold text-lg text-slate-900">Farm2Home</span>
+              <span className="font-extrabold text-lg text-slate-900 tracking-tight">Farm2Home</span>
             </div>
-            <p className="text-xs text-slate-500 leading-relaxed">
+            <p className="text-xs text-slate-600 leading-relaxed">
               Direct farm-to-home fresh produce logistics connecting Mira Bhayandar, Maharashtra.
             </p>
-            <p className="text-xs text-slate-400 font-mono">
+            <p className="text-xs text-slate-500 font-mono">
               Designed for College Idea Lab Innovation
             </p>
           </div>
 
           <div className="space-y-2 text-xs">
-            <h4 className="font-bold text-slate-900">Delivery Corridors</h4>
-            <p className="text-slate-500">Mira Road (East & West)</p>
-            <p className="text-slate-500">Bhayandar West (Maxus / 150ft Rd)</p>
-            <p className="text-slate-500">Bhayandar East (Indralok / Navghar)</p>
-            <p className="text-slate-500">Harvest Zones: Uttan, Dongri, Morva, Rai</p>
+            <h4 className="font-bold text-slate-900 tracking-tight">Delivery Corridors</h4>
+            <p className="text-slate-600">Mira Road (East & West)</p>
+            <p className="text-slate-600">Bhayandar West (Maxus / 150ft Rd)</p>
+            <p className="text-slate-600">Bhayandar East (Indralok / Navghar)</p>
+            <p className="text-slate-600">Harvest Zones: Uttan, Dongri, Morva, Rai</p>
           </div>
 
           <div className="space-y-2 text-xs">
-            <h4 className="font-bold text-slate-900">Platform Links</h4>
+            <h4 className="font-bold text-slate-900 tracking-tight">Platform Links</h4>
             <p>
-              <button onClick={() => onNavigate('marketplace')} className="text-slate-500 hover:text-farm-800">
+              <button onClick={() => onNavigate('marketplace')} className="text-slate-600 hover:text-farm-800 transition">
                 Marketplace Produce
               </button>
             </p>
             <p>
-              <button onClick={() => onNavigate('farmers')} className="text-slate-500 hover:text-farm-800">
+              <button onClick={() => onNavigate('farmers')} className="text-slate-600 hover:text-farm-800 transition">
                 Verified Farmers
               </button>
             </p>
             <p>
-              <button onClick={() => onNavigate('how-it-works')} className="text-slate-500 hover:text-farm-800">
+              <button onClick={() => onNavigate('how-it-works')} className="text-slate-600 hover:text-farm-800 transition">
                 Harvest-to-Door Logistics
               </button>
             </p>
             <p>
-              <button onClick={() => onNavigate('auth')} className="text-slate-500 hover:text-farm-800">
+              <button onClick={() => onNavigate('auth')} className="text-slate-600 hover:text-farm-800 transition">
                 Register as Cultivator
               </button>
             </p>
           </div>
 
           <div className="space-y-2 text-xs">
-            <h4 className="font-bold text-slate-900">Customer Support & FAQs</h4>
-            <p className="text-slate-500">Support Desk: +91 98200 00001</p>
-            <p className="text-slate-500">Email: help@farm2home-mirabhayandar.in</p>
-            <p className="text-slate-500">Payments: Cash on Delivery & Doorstep UPI</p>
+            <h4 className="font-bold text-slate-900 tracking-tight">Customer Support & FAQs</h4>
+            <p className="text-slate-600">Support Desk: +91 98200 00001</p>
+            <p className="text-slate-600">Email: help@farm2home-mirabhayandar.in</p>
+            <p className="text-slate-600">Payments: Cash on Delivery & Doorstep UPI</p>
           </div>
         </div>
 
-        <div className="border-t border-slate-100 py-6 text-center text-xs text-slate-400 flex flex-col sm:flex-row justify-between items-center gap-2">
+        <div className="border-t border-slate-200 py-6 text-center text-xs text-slate-500 flex flex-col sm:flex-row justify-between items-center gap-2">
           <span>© 2026 Farm2Home. All rights reserved. Thane District, Maharashtra.</span>
           <span>OpenStreetMap & Supabase PostgreSQL Powered</span>
         </div>
