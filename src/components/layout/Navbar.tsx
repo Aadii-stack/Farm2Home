@@ -9,7 +9,6 @@ import {
   Sprout,
   ShieldCheck,
   ChevronDown,
-  Database,
   ArrowRight,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
@@ -19,15 +18,14 @@ import { UserRole } from '../../types';
 interface NavbarProps {
   activeTab: string;
   setActiveTab: (tab: string) => void;
-  onOpenSetupModal: () => void;
+  onOpenSetupModal?: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   activeTab,
   setActiveTab,
-  onOpenSetupModal,
 }) => {
-  const { user, role, loginAsDemoRole, signOut, isLiveSupabase } = useAuth();
+  const { user, role, loginAsDemoRole, signOut } = useAuth();
   const { itemCount, setIsCartOpen } = useCart();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [roleDropdownOpen, setRoleDropdownOpen] = useState(false);
@@ -42,30 +40,6 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   return (
     <header className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b border-farm-100 shadow-xs">
-      {/* Top Agricultural Context & Live/Demo Indicator Banner */}
-      <div className="bg-farm-900 text-farm-100 text-xs py-1.5 px-4">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
-          <div className="flex items-center gap-2">
-            <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse motion-reduce:animate-none"></span>
-            <span className="font-medium">
-              Mira Bhayandar Farm Corridor: Morning harvests from Uttan, Dongri & Morva
-            </span>
-          </div>
-          <div className="flex items-center gap-4 text-[11px]">
-            <div className="flex items-center gap-1.5 bg-farm-800/80 px-2 py-0.5 rounded border border-farm-700">
-              <Database className="w-3 h-3 text-emerald-300" />
-              <span>{isLiveSupabase ? 'Live Supabase DB' : 'Interactive Demo Data'}</span>
-            </div>
-            <button
-              onClick={onOpenSetupModal}
-              className="text-emerald-300 hover:text-white underline font-medium transition duration-150 motion-reduce:transition-none"
-            >
-              Supabase Setup
-            </button>
-          </div>
-        </div>
-      </div>
-
       {/* Main Navbar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
