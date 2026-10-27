@@ -340,6 +340,11 @@ export const api = {
       });
 
       if (error) throw new Error(error.message);
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(
+          new CustomEvent('farm2home:order_placed', { detail: { orderId: data.order_id } })
+        );
+      }
       return {
         orderId: data.order_id,
         orderNumber: data.order_number,
@@ -419,6 +424,12 @@ export const api = {
 
     demoDb.orders.unshift(newOrder);
     demoDb.persist();
+
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(
+        new CustomEvent('farm2home:order_placed', { detail: { orderId } })
+      );
+    }
 
     return {
       orderId,

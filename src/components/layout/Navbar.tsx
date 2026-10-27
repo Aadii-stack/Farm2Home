@@ -35,8 +35,34 @@ export const Navbar: React.FC<NavbarProps> = ({
     setRoleDropdownOpen(false);
     if (newRole === 'farmer') setActiveTab('farmer-dashboard');
     else if (newRole === 'admin') setActiveTab('admin-dashboard');
-    else setActiveTab('marketplace');
+    else setActiveTab('consumer-dashboard');
   };
+
+  const dashboardTabId =
+    role === 'farmer'
+      ? 'farmer-dashboard'
+      : role === 'admin'
+      ? 'admin-dashboard'
+      : 'consumer-dashboard';
+
+  const dashboardLabel =
+    role === 'farmer'
+      ? 'Farmer Dashboard'
+      : role === 'admin'
+      ? 'Admin Dashboard'
+      : 'Dashboard';
+
+  const navTabs = user
+    ? [
+        { id: 'marketplace', label: 'Marketplace' },
+        { id: dashboardTabId, label: dashboardLabel },
+      ]
+    : [
+        { id: 'home', label: 'Home' },
+        { id: 'marketplace', label: 'Marketplace' },
+        { id: 'farmers', label: 'Local Farmers' },
+        { id: 'how-it-works', label: 'How It Works' },
+      ];
 
   return (
     <header className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b border-farm-100 shadow-xs">
@@ -45,7 +71,7 @@ export const Navbar: React.FC<NavbarProps> = ({
         <div className="flex items-center justify-between h-20">
           {/* Logo & Tagline */}
           <div
-            onClick={() => setActiveTab('home')}
+            onClick={() => setActiveTab(user ? 'marketplace' : 'home')}
             className="flex items-center gap-3 cursor-pointer select-none group"
           >
             <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-farm-700 to-farm-900 flex items-center justify-center text-white shadow-md shadow-farm-900/10 group-hover:scale-105 transition duration-200">
@@ -68,12 +94,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
           {/* Desktop Navigation Links */}
           <nav className="hidden md:flex items-center gap-1 bg-farm-50/80 p-1.5 rounded-full border border-farm-100 relative">
-            {[
-              { id: 'home', label: 'Home' },
-              { id: 'marketplace', label: 'Marketplace' },
-              { id: 'farmers', label: 'Local Farmers' },
-              { id: 'how-it-works', label: 'How It Works' },
-            ].map((tab) => {
+            {navTabs.map((tab) => {
               const isActive = activeTab === tab.id;
               return (
                 <button
@@ -229,6 +250,18 @@ export const Navbar: React.FC<NavbarProps> = ({
                     >
                       <span>Login / Register New Account</span>
                     </button>
+                    {user && (
+                      <button
+                        onClick={() => {
+                          signOut();
+                          setActiveTab('marketplace');
+                          setRoleDropdownOpen(false);
+                        }}
+                        className="w-full text-left px-4 py-2 text-xs text-red-600 hover:bg-red-50 flex items-center justify-between border-t border-slate-100"
+                      >
+                        <span>Sign Out</span>
+                      </button>
+                    )}
                   </div>
                 </div>
               )}
@@ -248,52 +281,32 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-farm-100 bg-white px-4 pt-3 pb-6 space-y-3 animate-in fade-in slide-in-from-top-2 duration-200 ease-out motion-reduce:animate-none">
-          <button
-            onClick={() => {
-              setActiveTab('home');
-              setMobileMenuOpen(false);
-            }}
-            className="block w-full text-left px-3 py-2 text-sm font-semibold rounded-lg hover:bg-farm-50 transition-colors duration-150"
-          >
-            Home
-          </button>
-          <button
-            onClick={() => {
-              setActiveTab('marketplace');
-              setMobileMenuOpen(false);
-            }}
-            className="block w-full text-left px-3 py-2 text-sm font-semibold rounded-lg hover:bg-farm-50 transition-colors duration-150"
-          >
-            Marketplace
-          </button>
-          <button
-            onClick={() => {
-              setActiveTab('farmers');
-              setMobileMenuOpen(false);
-            }}
-            className="block w-full text-left px-3 py-2 text-sm font-semibold rounded-lg hover:bg-farm-50 transition-colors duration-150"
-          >
-            Local Farmers
-          </button>
-          <button
-            onClick={() => {
-              setActiveTab('how-it-works');
-              setMobileMenuOpen(false);
-            }}
-            className="block w-full text-left px-3 py-2 text-sm font-semibold rounded-lg hover:bg-farm-50 transition-colors duration-150"
-          >
-            How It Works
-          </button>
+        <div className="md:hidden border-t border-farm-100 bg-white px-4 pt-3 pb-6 space-y-2 animate-in fade-in slide-in-from-top-2 duration-200 ease-out motion-reduce:animate-none">
+          {navTabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => {
+                setActiveTab(tab.id);
+                setMobileMenuOpen(false);
+              }}
+              className={`block w-full text-left px-3 py-2 text-sm font-semibold rounded-lg transition-colors duration-150 ${
+                activeTab === tab.id
+                  ? 'bg-farm-800 text-white font-bold'
+                  : 'hover:bg-farm-50 text-slate-800'
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
           <div className="pt-2 border-t border-slate-100 flex flex-col gap-2">
             <button
               onClick={() => {
-                setActiveTab('consumer-dashboard');
+                handleRoleChange('consumer');
                 setMobileMenuOpen(false);
               }}
-              className="text-left px-3 py-2 text-sm font-bold text-farm-800 bg-farm-50 rounded-lg transition-colors duration-150"
+              className="text-left px-3 py-2 text-sm font-bold text-slate-800 bg-slate-50 rounded-lg transition-colors duration-150"
             >
-              📦 My Orders & Addresses
+              🛒 Switch to Consumer Mode
             </button>
             <button
               onClick={() => {

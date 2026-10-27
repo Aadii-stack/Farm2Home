@@ -66,6 +66,11 @@ const MainApp: React.FC = () => {
   };
 
   const handleOrderSuccess = (orderId: string) => {
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(
+        new CustomEvent('farm2home:order_placed', { detail: { orderId } })
+      );
+    }
     setActiveTab('consumer-dashboard');
   };
 

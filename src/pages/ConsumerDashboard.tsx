@@ -15,7 +15,8 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useCart } from '../context/CartContext';
-import { api } from '../services/api';
+import { api, isUUID } from '../services/api';
+import { supabase, isSupabaseConfigured } from '../lib/supabase';
 import { Order, Address, OrderStatus, Product, OrderItem } from '../types';
 import { DeliveryMap } from '../components/common/DeliveryMap';
 
@@ -39,14 +40,9 @@ export const ConsumerDashboard: React.FC = () => {
   const [comment, setComment] = useState('');
   const [isSubmittingReview, setIsSubmittingReview] = useState(false);
 
-  useEffect(() => {
+  const loadConsumerData = async (focusOrderId?: string, silent?: boolean) => {
     if (!user) return;
-    loadConsumerData();
-  }, [user]);
-
-  const loadConsumerData = async () => {
-    if (!user) return;
-    setIsLoading(true);
+    if (!silent) setIsLoading(true);
     try {
       const [ords, addrs] = await Promise.all([
         api.getOrdersForConsumer(user.id),
@@ -54,15 +50,69 @@ export const ConsumerDashboard: React.FC = () => {
       ]);
       setOrders(ords);
       setAddresses(addrs);
-      if (ords.length > 0 && !selectedOrder) {
-        setSelectedOrder(ords[0]);
+
+      if (focusOrderId) {
+        const found = ords.find((o) => o.id === focusOrderId);
+        if (found) setSelectedOrder(found);
+        else if (ords.length > 0) setSelectedOrder(ords[0]);
+      } else {
+        setSelectedOrder((prev) => {
+          if (!prev) return ords.length > 0 ? ords[0] : null;
+          const matched = ords.find((o) => o.id === prev.id);
+          return matched || (ords.length > 0 ? ords[0] : null);
+        });
       }
     } catch (err: any) {
-      console.error(err);
+      console.error('Error loading consumer data:', err);
     } finally {
-      setIsLoading(false);
+      if (!silent) setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (!user) return;
+    loadConsumerData();
+
+    // 1. Instant event when an order is placed locally in the app
+    const onOrderPlaced = (e: any) => {
+      const placedOrderId = e.detail?.orderId;
+      loadConsumerData(placedOrderId);
+    };
+    window.addEventListener('farm2home:order_placed', onOrderPlaced);
+
+    // 2. Real-time background sync interval (3.5s) to reflect live harvest status without refresh
+    const syncTimer = setInterval(() => {
+      loadConsumerData(undefined, true);
+    }, 3500);
+
+    // 3. Supabase Realtime channel if valid UUID
+    let channel: any = null;
+    if (isSupabaseConfigured && supabase && isUUID(user.id)) {
+      channel = supabase
+        .channel(`consumer-orders-${user.id}`)
+        .on(
+          'postgres_changes',
+          {
+            event: '*',
+            schema: 'public',
+            table: 'orders',
+            filter: `consumer_id=eq.${user.id}`,
+          },
+          () => {
+            loadConsumerData(undefined, true);
+          }
+        )
+        .subscribe();
+    }
+
+    return () => {
+      window.removeEventListener('farm2home:order_placed', onOrderPlaced);
+      clearInterval(syncTimer);
+      if (channel && supabase) {
+        supabase.removeChannel(channel);
+      }
+    };
+  }, [user?.id]);
 
   const handleCancelOrder = async (orderId: string) => {
     if (!user) return;

@@ -135,6 +135,11 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({
       });
 
       clearCart();
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(
+          new CustomEvent('farm2home:order_placed', { detail: { orderId: res.orderId } })
+        );
+      }
       onOrderSuccess(res.orderId);
       onClose();
     } catch (err: any) {
