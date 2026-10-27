@@ -1,0 +1,13 @@
+services:
+  farm2home:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: farm2home_app
+    ports:
+      - "3000:80"
+    environment:
+      - NODE_ENV=production
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
