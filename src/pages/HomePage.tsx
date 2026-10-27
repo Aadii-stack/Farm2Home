@@ -7,7 +7,6 @@ import {
   HeartHandshake,
   CheckCircle2,
   Clock,
-  Sparkles,
   Search,
   Star,
   Users,
@@ -70,8 +69,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenProductDet
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             {/* Left Column: Headlines & Search */}
             <div className="lg:col-span-7 space-y-6 text-center lg:text-left">
-              <div className="inline-flex items-center gap-2 bg-farm-700/80 border border-emerald-400/30 px-3.5 py-1.5 rounded-full text-xs font-semibold text-emerald-200">
-                <Sparkles className="w-3.5 h-3.5 text-emerald-300" />
+              <div className="inline-flex items-center bg-farm-700/80 border border-emerald-400/30 px-3.5 py-1.5 rounded-full text-xs font-semibold text-emerald-200">
                 <span>Direct from Mira Bhayandar Farmlands</span>
               </div>
 
@@ -135,12 +133,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate, onOpenProductDet
                   className="w-full h-96 object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent flex flex-col justify-end p-6">
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
-                    <span className="text-xs uppercase tracking-wider text-emerald-300 font-bold">
-                      Picked at 5:30 AM Today
-                    </span>
-                  </div>
                   <h3 className="text-xl font-bold text-white">Bhaskar Patil's Coastal Farm</h3>
                   <p className="text-xs text-slate-300 mt-1">
                     Uttan, Bhayandar West • Organic sweet potatoes, leafy greens & tender coconuts
