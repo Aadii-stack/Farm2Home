@@ -45,7 +45,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="bg-farm-900 text-farm-100 text-xs py-1.5 px-4">
         <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-2">
-            <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse motion-reduce:animate-none"></span>
             <span className="font-medium">
               Mira Bhayandar Farm Corridor: Morning harvests from Uttan, Dongri & Morva
             </span>
@@ -57,7 +57,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </div>
             <button
               onClick={onOpenSetupModal}
-              className="text-emerald-300 hover:text-white underline font-medium transition"
+              className="text-emerald-300 hover:text-white underline font-medium transition duration-150 motion-reduce:transition-none"
             >
               Supabase Setup
             </button>
@@ -95,7 +95,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <nav className="hidden md:flex items-center gap-1 bg-farm-50/80 p-1.5 rounded-full border border-farm-100">
             <button
               onClick={() => setActiveTab('home')}
-              className={`px-4 py-2 rounded-full text-sm font-semibold transition ${
+              className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-150 motion-reduce:transition-none ${
                 activeTab === 'home'
                   ? 'bg-farm-800 text-white shadow-xs'
                   : 'text-slate-600 hover:text-farm-900 hover:bg-farm-100/60'
@@ -105,7 +105,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
             <button
               onClick={() => setActiveTab('marketplace')}
-              className={`px-4 py-2 rounded-full text-sm font-semibold transition ${
+              className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-150 motion-reduce:transition-none ${
                 activeTab === 'marketplace'
                   ? 'bg-farm-800 text-white shadow-xs'
                   : 'text-slate-600 hover:text-farm-900 hover:bg-farm-100/60'
@@ -115,7 +115,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
             <button
               onClick={() => setActiveTab('farmers')}
-              className={`px-4 py-2 rounded-full text-sm font-semibold transition ${
+              className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-150 motion-reduce:transition-none ${
                 activeTab === 'farmers'
                   ? 'bg-farm-800 text-white shadow-xs'
                   : 'text-slate-600 hover:text-farm-900 hover:bg-farm-100/60'
@@ -125,7 +125,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             </button>
             <button
               onClick={() => setActiveTab('how-it-works')}
-              className={`px-4 py-2 rounded-full text-sm font-semibold transition ${
+              className={`px-4 py-2 rounded-full text-sm font-semibold transition-colors duration-150 motion-reduce:transition-none ${
                 activeTab === 'how-it-works'
                   ? 'bg-farm-800 text-white shadow-xs'
                   : 'text-slate-600 hover:text-farm-900 hover:bg-farm-100/60'
@@ -146,12 +146,12 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Shopping Cart Button */}
             <button
               onClick={() => setIsCartOpen(true)}
-              className="relative p-2.5 rounded-full bg-farm-50 text-farm-800 hover:bg-farm-100 border border-farm-200 transition focus:outline-hidden focus:ring-2 focus:ring-farm-500"
+              className="relative p-2.5 rounded-full bg-farm-50 text-farm-800 hover:bg-farm-100 border border-farm-200 transition-all duration-150 active:scale-95 motion-reduce:transform-none focus:outline-hidden focus:ring-2 focus:ring-farm-500"
               aria-label="View Cart"
             >
-              <ShoppingBag className="w-5 h-5" />
+              <ShoppingBag className="w-5 h-5 transition-transform duration-150 group-hover:scale-105 motion-reduce:transform-none" />
               {itemCount > 0 && (
-                <span className="absolute -top-1 -right-1 w-5 h-5 rounded-full bg-earth-600 text-white text-[11px] font-bold flex items-center justify-center animate-bounce">
+                <span className="absolute -top-1 -right-1 min-w-5 h-5 px-1 rounded-full bg-earth-600 text-white text-[11px] font-bold flex items-center justify-center shadow-xs transition-transform duration-200 ease-out animate-in fade-in zoom-in-75 motion-reduce:animate-none">
                   {itemCount}
                 </span>
               )}
@@ -161,7 +161,7 @@ export const Navbar: React.FC<NavbarProps> = ({
             <div className="relative">
               <button
                 onClick={() => setRoleDropdownOpen(!roleDropdownOpen)}
-                className="flex items-center gap-2 px-3 py-2 rounded-xl bg-farm-50 hover:bg-farm-100 border border-farm-200 text-xs font-semibold text-farm-900 transition"
+                className="flex items-center gap-2 px-3 py-2 rounded-xl bg-farm-50 hover:bg-farm-100 border border-farm-200 text-xs font-semibold text-farm-900 transition-colors duration-150"
               >
                 <div className="w-6 h-6 rounded-full bg-farm-700 text-white flex items-center justify-center text-xs">
                   {role === 'farmer' ? '🚜' : role === 'admin' ? '⚡' : '🛒'}
@@ -172,11 +172,15 @@ export const Navbar: React.FC<NavbarProps> = ({
                     {role === 'consumer' ? 'Consumer' : role === 'farmer' ? 'Farmer' : 'Admin'}
                   </p>
                 </div>
-                <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
+                <ChevronDown
+                  className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-200 ease-out motion-reduce:transition-none ${
+                    roleDropdownOpen ? 'rotate-180' : ''
+                  }`}
+                />
               </button>
 
               {roleDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-64 bg-white rounded-2xl shadow-xl border border-slate-100 py-2 z-50 animate-in fade-in slide-in-from-top-2">
+                <div className="absolute right-0 mt-2 w-64 bg-white rounded-2xl shadow-xl border border-slate-100 py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200 ease-out motion-reduce:animate-none origin-top-right">
                   <div className="px-4 py-2 border-b border-slate-100">
                     <p className="text-xs text-slate-400 font-medium">Logged in as</p>
                     <p className="text-sm font-bold text-slate-900 truncate">{user?.full_name}</p>
@@ -272,7 +276,8 @@ export const Navbar: React.FC<NavbarProps> = ({
             {/* Mobile Menu Trigger */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="md:hidden p-2 text-slate-700 hover:text-farm-900"
+              className="md:hidden p-2 text-slate-700 hover:text-farm-900 transition-colors duration-150 rounded-lg active:scale-95 motion-reduce:transform-none"
+              aria-label={mobileMenuOpen ? 'Close Menu' : 'Open Menu'}
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -282,13 +287,13 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-farm-100 bg-white px-4 pt-3 pb-6 space-y-3">
+        <div className="md:hidden border-t border-farm-100 bg-white px-4 pt-3 pb-6 space-y-3 animate-in fade-in slide-in-from-top-2 duration-200 ease-out motion-reduce:animate-none">
           <button
             onClick={() => {
               setActiveTab('home');
               setMobileMenuOpen(false);
             }}
-            className="block w-full text-left px-3 py-2 text-sm font-semibold rounded-lg hover:bg-farm-50"
+            className="block w-full text-left px-3 py-2 text-sm font-semibold rounded-lg hover:bg-farm-50 transition-colors duration-150"
           >
             Home
           </button>
@@ -297,7 +302,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               setActiveTab('marketplace');
               setMobileMenuOpen(false);
             }}
-            className="block w-full text-left px-3 py-2 text-sm font-semibold rounded-lg hover:bg-farm-50"
+            className="block w-full text-left px-3 py-2 text-sm font-semibold rounded-lg hover:bg-farm-50 transition-colors duration-150"
           >
             Marketplace
           </button>
@@ -306,7 +311,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               setActiveTab('farmers');
               setMobileMenuOpen(false);
             }}
-            className="block w-full text-left px-3 py-2 text-sm font-semibold rounded-lg hover:bg-farm-50"
+            className="block w-full text-left px-3 py-2 text-sm font-semibold rounded-lg hover:bg-farm-50 transition-colors duration-150"
           >
             Local Farmers
           </button>
@@ -315,7 +320,7 @@ export const Navbar: React.FC<NavbarProps> = ({
               setActiveTab('how-it-works');
               setMobileMenuOpen(false);
             }}
-            className="block w-full text-left px-3 py-2 text-sm font-semibold rounded-lg hover:bg-farm-50"
+            className="block w-full text-left px-3 py-2 text-sm font-semibold rounded-lg hover:bg-farm-50 transition-colors duration-150"
           >
             How It Works
           </button>
@@ -325,7 +330,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 setActiveTab('consumer-dashboard');
                 setMobileMenuOpen(false);
               }}
-              className="text-left px-3 py-2 text-sm font-bold text-farm-800 bg-farm-50 rounded-lg"
+              className="text-left px-3 py-2 text-sm font-bold text-farm-800 bg-farm-50 rounded-lg transition-colors duration-150"
             >
               📦 My Orders & Addresses
             </button>
@@ -334,7 +339,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 handleRoleChange('farmer');
                 setMobileMenuOpen(false);
               }}
-              className="text-left px-3 py-2 text-sm font-bold text-slate-800 bg-slate-50 rounded-lg"
+              className="text-left px-3 py-2 text-sm font-bold text-slate-800 bg-slate-50 rounded-lg transition-colors duration-150"
             >
               🚜 Switch to Farmer Mode
             </button>
@@ -343,7 +348,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                 handleRoleChange('admin');
                 setMobileMenuOpen(false);
               }}
-              className="text-left px-3 py-2 text-sm font-bold text-slate-800 bg-slate-50 rounded-lg"
+              className="text-left px-3 py-2 text-sm font-bold text-slate-800 bg-slate-50 rounded-lg transition-colors duration-150"
             >
               ⚡ Switch to Admin Mode
             </button>
