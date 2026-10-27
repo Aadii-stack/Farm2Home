@@ -116,68 +116,68 @@ export const AdminDashboard: React.FC = () => {
           <span className="text-xs bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 px-2.5 py-0.5 rounded-full font-bold">
             Platform Governance Desk
           </span>
-          <h1 className="text-2xl sm:text-3xl font-extrabold mt-1">Farm2Home Central Administration</h1>
-          <p className="text-xs text-slate-400">
+          <h1 className="text-2xl sm:text-3xl font-extrabold mt-1 tracking-tight">Farm2Home Central Administration</h1>
+          <p className="text-xs text-slate-300 leading-relaxed mt-0.5">
             Monitoring Mira Bhayandar agricultural distribution, farmer approvals & order integrity.
           </p>
         </div>
       </div>
 
       {notification && (
-        <div className="p-3.5 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs flex items-center gap-2">
-          <CheckCircle className="w-4 h-4 text-emerald-600" />
-          <span>{notification}</span>
+        <div className="p-3.5 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-950 text-xs flex items-center gap-2">
+          <CheckCircle className="w-4 h-4 text-emerald-700" />
+          <span className="font-medium">{notification}</span>
         </div>
       )}
 
       {/* Tabs */}
-      <div className="flex border-b border-slate-200 gap-2 overflow-x-auto pb-1 text-xs font-bold">
+      <div className="flex border-b border-slate-200 gap-2 overflow-x-auto pb-2 text-xs font-bold">
         <button
           onClick={() => setActiveTab('overview')}
-          className={`px-4 py-2 rounded-t-xl transition ${
+          className={`px-4 py-2 rounded-xl transition duration-150 motion-reduce:transition-none ${
             activeTab === 'overview'
-              ? 'border-b-2 border-farm-800 text-farm-900 bg-white'
-              : 'text-slate-500 hover:text-slate-800'
+              ? 'bg-farm-900 text-white shadow-xs'
+              : 'bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-900'
           }`}
         >
           Executive Overview
         </button>
         <button
           onClick={() => setActiveTab('farmers')}
-          className={`px-4 py-2 rounded-t-xl transition ${
+          className={`px-4 py-2 rounded-xl transition duration-150 motion-reduce:transition-none ${
             activeTab === 'farmers'
-              ? 'border-b-2 border-farm-800 text-farm-900 bg-white'
-              : 'text-slate-500 hover:text-slate-800'
+              ? 'bg-farm-900 text-white shadow-xs'
+              : 'bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-900'
           }`}
         >
           Farmer Verification ({farmers.length})
         </button>
         <button
           onClick={() => setActiveTab('products')}
-          className={`px-4 py-2 rounded-t-xl transition ${
+          className={`px-4 py-2 rounded-xl transition duration-150 motion-reduce:transition-none ${
             activeTab === 'products'
-              ? 'border-b-2 border-farm-800 text-farm-900 bg-white'
-              : 'text-slate-500 hover:text-slate-800'
+              ? 'bg-farm-900 text-white shadow-xs'
+              : 'bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-900'
           }`}
         >
           Product Moderation ({products.length})
         </button>
         <button
           onClick={() => setActiveTab('orders')}
-          className={`px-4 py-2 rounded-t-xl transition ${
+          className={`px-4 py-2 rounded-xl transition duration-150 motion-reduce:transition-none ${
             activeTab === 'orders'
-              ? 'border-b-2 border-farm-800 text-farm-900 bg-white'
-              : 'text-slate-500 hover:text-slate-800'
+              ? 'bg-farm-900 text-white shadow-xs'
+              : 'bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-900'
           }`}
         >
           All Orders Oversight ({orders.length})
         </button>
         <button
           onClick={() => setActiveTab('slots')}
-          className={`px-4 py-2 rounded-t-xl transition ${
+          className={`px-4 py-2 rounded-xl transition duration-150 motion-reduce:transition-none ${
             activeTab === 'slots'
-              ? 'border-b-2 border-farm-800 text-farm-900 bg-white'
-              : 'text-slate-500 hover:text-slate-800'
+              ? 'bg-farm-900 text-white shadow-xs'
+              : 'bg-slate-100 text-slate-700 hover:bg-slate-200 hover:text-slate-900'
           }`}
         >
           Delivery Slot Capacities
@@ -189,24 +189,24 @@ export const AdminDashboard: React.FC = () => {
         <div className="space-y-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-xs">
-              <p className="text-xs text-slate-500 font-medium">Platform Gross Volume</p>
-              <p className="text-2xl font-black text-slate-900 mt-1">₹{stats.totalRevenue.toFixed(2)}</p>
-              <p className="text-[10px] text-emerald-700 font-semibold mt-1">Across all completed checkouts</p>
+              <p className="text-xs text-slate-600 font-medium">Platform Gross Volume</p>
+              <p className="text-2xl font-black text-slate-950 mt-1 tabular-nums tracking-tight">₹{stats.totalRevenue.toFixed(2)}</p>
+              <p className="text-[10px] text-emerald-800 font-semibold mt-1">Across all completed checkouts</p>
             </div>
             <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-xs">
-              <p className="text-xs text-slate-500 font-medium">Registered Farmers</p>
-              <p className="text-2xl font-black text-farm-900 mt-1">{stats.totalFarmers}</p>
-              <p className="text-[10px] text-slate-400 mt-1">Uttan, Dongri, Morva, Rai</p>
+              <p className="text-xs text-slate-600 font-medium">Registered Farmers</p>
+              <p className="text-2xl font-black text-farm-900 mt-1 tabular-nums tracking-tight">{stats.totalFarmers}</p>
+              <p className="text-[10px] text-slate-500 mt-1 font-medium">Uttan, Dongri, Morva, Rai</p>
             </div>
             <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-xs">
-              <p className="text-xs text-slate-500 font-medium">Registered Consumers</p>
-              <p className="text-2xl font-black text-slate-900 mt-1">{stats.totalConsumers}</p>
-              <p className="text-[10px] text-slate-400 mt-1">Mira Road & Bhayandar</p>
+              <p className="text-xs text-slate-600 font-medium">Registered Consumers</p>
+              <p className="text-2xl font-black text-slate-950 mt-1 tabular-nums tracking-tight">{stats.totalConsumers}</p>
+              <p className="text-[10px] text-slate-500 mt-1 font-medium">Mira Road & Bhayandar</p>
             </div>
             <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-xs">
-              <p className="text-xs text-slate-500 font-medium">Total Orders Placed</p>
-              <p className="text-2xl font-black text-slate-900 mt-1">{stats.totalOrders}</p>
-              <p className="text-[10px] text-emerald-700 font-semibold mt-1">
+              <p className="text-xs text-slate-600 font-medium">Total Orders Placed</p>
+              <p className="text-2xl font-black text-slate-950 mt-1 tabular-nums tracking-tight">{stats.totalOrders}</p>
+              <p className="text-[10px] text-emerald-800 font-semibold mt-1">
                 {stats.completedOrders} Delivered • {stats.pendingOrders} Active
               </p>
             </div>
@@ -219,7 +219,7 @@ export const AdminDashboard: React.FC = () => {
         <div className="bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-xs">
           <div className="p-5 border-b border-slate-100 flex items-center justify-between">
             <h3 className="text-sm font-bold text-slate-900">Registered Local Farmer Cooperatives</h3>
-            <span className="text-xs text-slate-500">Only verified farmers are displayed on the public marketplace</span>
+            <span className="text-xs text-slate-600">Only verified farmers are displayed on the public marketplace</span>
           </div>
 
           <div className="divide-y divide-slate-100 text-xs">
@@ -229,19 +229,19 @@ export const AdminDashboard: React.FC = () => {
                   <div className="flex items-center gap-2">
                     <h4 className="font-bold text-slate-900 text-sm">{farmer.farm_name}</h4>
                     <span
-                      className={`text-[10px] px-2 py-0.5 rounded-full font-bold uppercase ${
+                      className={`text-[10px] px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider border ${
                         farmer.verification_status === 'verified'
-                          ? 'bg-emerald-100 text-emerald-800'
+                          ? 'bg-emerald-50 text-emerald-900 border-emerald-200'
                           : farmer.verification_status === 'rejected'
-                          ? 'bg-red-100 text-red-800'
-                          : 'bg-amber-100 text-amber-800'
+                          ? 'bg-red-50 text-red-900 border-red-200'
+                          : 'bg-amber-50 text-amber-900 border-amber-200'
                       }`}
                     >
-                      {farmer.verification_status}
+                      {farmer.verification_status === 'verified' ? '✓ Verified' : farmer.verification_status === 'rejected' ? '✕ Rejected' : '⏳ Pending'}
                     </span>
                   </div>
-                  <p className="text-slate-600 mt-1">{farmer.description}</p>
-                  <p className="text-slate-400 text-[11px] mt-0.5">
+                  <p className="text-slate-700 mt-1">{farmer.description}</p>
+                  <p className="text-slate-500 text-[11px] mt-0.5 font-medium">
                     📍 {farmer.address} ({farmer.locality}) • Lat: {farmer.latitude.toFixed(4)}, Lng: {farmer.longitude.toFixed(4)}
                   </p>
                 </div>
@@ -250,7 +250,7 @@ export const AdminDashboard: React.FC = () => {
                   {farmer.verification_status !== 'verified' && (
                     <button
                       onClick={() => handleUpdateFarmerStatus(farmer.id, 'verified')}
-                      className="px-3 py-1.5 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs"
+                      className="px-3.5 py-1.5 rounded-xl bg-emerald-800 hover:bg-emerald-900 text-white font-bold text-xs shadow-xs transition"
                     >
                       Verify Farm
                     </button>
@@ -258,7 +258,7 @@ export const AdminDashboard: React.FC = () => {
                   {farmer.verification_status !== 'rejected' && (
                     <button
                       onClick={() => handleUpdateFarmerStatus(farmer.id, 'rejected')}
-                      className="px-3 py-1.5 rounded-lg bg-red-100 hover:bg-red-200 text-red-700 font-bold text-xs"
+                      className="px-3.5 py-1.5 rounded-xl bg-red-50 hover:bg-red-100 text-red-900 border border-red-200 font-bold text-xs transition"
                     >
                       Reject
                     </button>
@@ -288,7 +288,7 @@ export const AdminDashboard: React.FC = () => {
                   />
                   <div>
                     <h4 className="font-bold text-slate-900">{prod.name}</h4>
-                    <p className="text-slate-500 text-[11px]">
+                    <p className="text-slate-600 text-[11px] font-medium">
                       Cultivator: {prod.farmer?.farm_name} • Price: ₹{prod.price} / {prod.unit} • Stock: {prod.available_quantity}
                     </p>
                   </div>
@@ -296,15 +296,17 @@ export const AdminDashboard: React.FC = () => {
 
                 <div className="flex items-center gap-3">
                   <span
-                    className={`text-[10px] px-2 py-0.5 rounded-full font-bold uppercase ${
-                      prod.is_active ? 'bg-emerald-100 text-emerald-800' : 'bg-slate-200 text-slate-600'
+                    className={`text-[10px] px-2.5 py-0.5 rounded-full font-bold uppercase tracking-wider border ${
+                      prod.is_active
+                        ? 'bg-emerald-50 text-emerald-900 border-emerald-200'
+                        : 'bg-slate-100 text-slate-700 border-slate-200'
                     }`}
                   >
-                    {prod.is_active ? 'Live' : 'Hidden'}
+                    {prod.is_active ? '● Live' : '○ Hidden'}
                   </span>
                   <button
                     onClick={() => handleToggleProductStatus(prod.id, prod.is_active)}
-                    className="px-3 py-1.5 rounded-lg border border-slate-300 hover:bg-slate-50 text-slate-700 font-semibold text-xs"
+                    className="px-3 py-1.5 rounded-lg border border-slate-300 hover:bg-slate-50 text-slate-800 font-semibold text-xs transition"
                   >
                     {prod.is_active ? 'Deactivate' : 'Activate'}
                   </button>
@@ -329,22 +331,22 @@ export const AdminDashboard: React.FC = () => {
                   <div className="flex items-center gap-2">
                     <span className="font-bold text-slate-900">#{ord.order_number}</span>
                     <span className="text-slate-400">•</span>
-                    <span className="font-semibold text-farm-800">₹{ord.total_amount.toFixed(2)}</span>
-                    <span className="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 rounded font-mono uppercase">
+                    <span className="font-bold text-farm-900 tabular-nums">₹{ord.total_amount.toFixed(2)}</span>
+                    <span className="text-[10px] bg-slate-100 text-slate-700 px-2 py-0.5 rounded font-mono uppercase border border-slate-200">
                       {ord.payment_method}
                     </span>
                   </div>
-                  <p className="text-slate-500 text-[11px] mt-1">
+                  <p className="text-slate-600 text-[11px] mt-1 font-medium">
                     Customer: {ord.address?.recipient_name} ({ord.address?.locality}) • Items: {ord.items?.length || 1}
                   </p>
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <span className="text-[11px] text-slate-400">Status:</span>
+                  <span className="text-[11px] text-slate-600 font-medium">Status:</span>
                   <select
                     value={ord.status}
                     onChange={(e) => handleUpdateOrderStatus(ord.id, e.target.value as OrderStatus)}
-                    className="px-2.5 py-1.5 rounded-xl border border-slate-300 font-bold text-xs bg-slate-50"
+                    className="px-2.5 py-1.5 rounded-xl border border-slate-300 font-bold text-xs bg-slate-50 text-slate-800 focus:ring-2 focus:ring-farm-600 focus:outline-hidden"
                   >
                     <option value="pending">Pending</option>
                     <option value="accepted">Accepted</option>
@@ -363,34 +365,34 @@ export const AdminDashboard: React.FC = () => {
 
       {/* TAB 5: DELIVERY SLOTS */}
       {activeTab === 'slots' && (
-        <div className="bg-white rounded-3xl border border-slate-200 p-6 space-y-4">
+        <div className="bg-white rounded-3xl border border-slate-200 p-6 space-y-4 shadow-xs">
           <div>
-            <h3 className="text-sm font-bold text-slate-900">Delivery Slot Capacity Configuration</h3>
-            <p className="text-xs text-slate-500">
+            <h3 className="text-sm font-bold text-slate-900 tracking-tight">Delivery Slot Capacity Configuration</h3>
+            <p className="text-xs text-slate-600 leading-relaxed mt-0.5">
               Configure maximum order thresholds per window to prevent delivery route bottlenecks across Mira Bhayandar.
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
             {deliverySlots.map((slot) => (
-              <div key={slot.id} className="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+              <div key={slot.id} className="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="font-bold text-slate-900">{slot.locality}</span>
-                  <span className="font-semibold text-farm-800">
+                  <span className="font-bold text-farm-900 tabular-nums">
                     {slot.start_time.slice(0, 5)} - {slot.end_time.slice(0, 5)}
                   </span>
                 </div>
-                <p className="text-slate-500">Date: {slot.delivery_date}</p>
+                <p className="text-slate-600 font-medium">Date: {slot.delivery_date}</p>
 
                 <div className="flex items-center justify-between pt-2 border-t border-slate-200">
-                  <label className="font-semibold text-slate-700">Max Order Capacity:</label>
+                  <label className="font-semibold text-slate-800">Max Order Capacity:</label>
                   <input
                     type="number"
                     min="1"
                     max="100"
                     value={slot.capacity}
                     onChange={(e) => handleUpdateSlotCapacity(slot.id, Number(e.target.value))}
-                    className="w-20 px-2.5 py-1 rounded-lg border border-slate-300 text-center font-bold"
+                    className="w-20 px-2.5 py-1 rounded-lg border border-slate-300 text-center font-bold text-slate-900 bg-white focus:ring-2 focus:ring-farm-600 focus:outline-hidden"
                   />
                 </div>
               </div>
