@@ -84,6 +84,11 @@ class DemoDatabase {
 
 export const demoDb = new DemoDatabase();
 
+export const isUUID = (str?: string | null): boolean => {
+  if (!str) return false;
+  return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(str);
+};
+
 // -----------------------------------------------------------------------------
 // Unified Data API (Routes to Supabase or Demo Store)
 // -----------------------------------------------------------------------------
@@ -110,7 +115,7 @@ export const api = {
   },
 
   async getFarmerById(id: string): Promise<FarmerProfile | null> {
-    if (isSupabaseConfigured && supabase) {
+    if (isSupabaseConfigured && supabase && isUUID(id)) {
       const { data, error } = await supabase.from('farmer_profiles').select('*').eq('id', id).single();
       if (!error && data) return data as FarmerProfile;
     }
@@ -118,7 +123,7 @@ export const api = {
   },
 
   async getFarmerByUserId(userId: string): Promise<FarmerProfile | null> {
-    if (isSupabaseConfigured && supabase) {
+    if (isSupabaseConfigured && supabase && isUUID(userId)) {
       const { data, error } = await supabase.from('farmer_profiles').select('*').eq('user_id', userId).single();
       if (!error && data) return data as FarmerProfile;
     }
@@ -126,7 +131,7 @@ export const api = {
   },
 
   async updateFarmerProfile(id: string, updates: Partial<FarmerProfile>): Promise<FarmerProfile> {
-    if (isSupabaseConfigured && supabase) {
+    if (isSupabaseConfigured && supabase && isUUID(id)) {
       const { data, error } = await supabase.from('farmer_profiles').update(updates).eq('id', id).select().single();
       if (error) throw new Error(error.message);
       return data as FarmerProfile;
@@ -245,7 +250,7 @@ export const api = {
   },
 
   async updateProduct(id: string, updates: Partial<Product>): Promise<Product> {
-    if (isSupabaseConfigured && supabase) {
+    if (isSupabaseConfigured && supabase && isUUID(id)) {
       const { data, error } = await supabase.from('products').update(updates).eq('id', id).select().single();
       if (error) throw new Error(error.message);
       return data as Product;
@@ -269,14 +274,14 @@ export const api = {
   async getDeliverySlots(): Promise<DeliverySlot[]> {
     if (isSupabaseConfigured && supabase) {
       const { data, error } = await supabase.from('delivery_slots').select('*').eq('is_active', true);
-      if (!error && data) return data as DeliverySlot[];
+      if (!error && data && data.length > 0) return data as DeliverySlot[];
     }
     return demoDb.deliverySlots.filter((s) => s.is_active);
   },
 
   // ADDRESSES
   async getAddresses(consumerId: string): Promise<Address[]> {
-    if (isSupabaseConfigured && supabase) {
+    if (isSupabaseConfigured && supabase && isUUID(consumerId)) {
       const { data, error } = await supabase.from('addresses').select('*').eq('consumer_id', consumerId);
       if (!error && data) return data as Address[];
     }
@@ -284,7 +289,7 @@ export const api = {
   },
 
   async createAddress(addressData: Omit<Address, 'id' | 'created_at'>): Promise<Address> {
-    if (isSupabaseConfigured && supabase) {
+    if (isSupabaseConfigured && supabase && isUUID(addressData.consumer_id)) {
       const { data, error } = await supabase.from('addresses').insert(addressData).select().single();
       if (error) throw new Error(error.message);
       return data as Address;
@@ -314,7 +319,13 @@ export const api = {
     notes?: string;
     items: { productId: string; quantity: number }[];
   }): Promise<{ orderId: string; orderNumber: string; totalAmount: number }> {
-    if (isSupabaseConfigured && supabase) {
+    const isAllUuid =
+      isUUID(params.consumerId) &&
+      isUUID(params.addressId) &&
+      isUUID(params.deliverySlotId) &&
+      params.items.every((it) => isUUID(it.productId));
+
+    if (isSupabaseConfigured && supabase && isAllUuid) {
       // Execute transactional PostgreSQL RPC function
       const { data, error } = await supabase.rpc('create_order_transactional', {
         p_consumer_id: params.consumerId,
@@ -418,7 +429,7 @@ export const api = {
 
   // CANCEL ORDER WITH STOCK RESTORATION
   async cancelOrder(orderId: string, userId: string): Promise<void> {
-    if (isSupabaseConfigured && supabase) {
+    if (isSupabaseConfigured && supabase && isUUID(orderId) && isUUID(userId)) {
       const { error } = await supabase.rpc('cancel_order_restore_stock', {
         p_order_id: orderId,
         p_user_id: userId,
@@ -450,7 +461,7 @@ export const api = {
 
   // ORDER STATUS PROGRESSION
   async updateOrderStatus(orderId: string, status: OrderStatus): Promise<void> {
-    if (isSupabaseConfigured && supabase) {
+    if (isSupabaseConfigured && supabase && isUUID(orderId)) {
       const { error } = await supabase
         .from('orders')
         .update({ status, updated_at: new Date().toISOString() })
@@ -473,7 +484,7 @@ export const api = {
     orderItemId: string,
     status: 'pending' | 'accepted' | 'rejected' | 'preparing' | 'ready'
   ): Promise<void> {
-    if (isSupabaseConfigured && supabase) {
+    if (isSupabaseConfigured && supabase && isUUID(orderItemId)) {
       const { error } = await supabase
         .from('order_items')
         .update({ farmer_fulfillment_status: status })
@@ -504,7 +515,7 @@ export const api = {
   // ORDERS FETCHING
   async getOrdersForConsumer(consumerId: string): Promise<Order[]> {
     let orders: Order[] = [];
-    if (isSupabaseConfigured && supabase) {
+    if (isSupabaseConfigured && supabase && isUUID(consumerId)) {
       const { data, error } = await supabase
         .from('orders')
         .select('*, address:addresses(*), delivery_slot:delivery_slots(*), items:order_items(*)')
