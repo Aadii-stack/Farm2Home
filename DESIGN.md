@@ -59,7 +59,7 @@ Reflecting the lush coastal farmlands of Thane district and authentic Indian agr
 | `text-muted` | `#4B5563` | Subtitles, helper text, timestamps |
 
 ### 3.2 Typography & Localization
-- **Font Stack:** Inter / Plus Jakarta Sans / system UI font stack with high legibility.
+- **Font Stack:** Outfit / system UI font stack with high legibility, strict vertical rhythm, and WCAG AA compliance.
 - **Currency:** Indian Rupee formatting (`₹{amount}`) with localized units (e.g., `₹40 / kg`, `₹25 / bunch`).
 - **Dates & Times:** Indian standard formatting (`DD MMM YYYY, hh:mm A IST`).
 - **Local Context:** Mira Bhayandar sub-regions explicitly supported:
